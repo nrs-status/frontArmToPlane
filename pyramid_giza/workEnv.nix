@@ -1,0 +1,27 @@
+{ pkgs, myPkgs }:
+let 
+  packagesFromNixpkgs = with pkgs; [
+    nix-index #allows finding what packages provide dependencies for auto-patchelf
+    git
+    ripgrep
+    bat
+    eza
+    jq
+    fzf
+    pkg-config
+
+    #for some builds
+    zlib
+
+  ];
+  packagesFromLocalRepo = with myPkgs; [
+    kitties.kitty
+    montezuma_circles_scroll.all
+  ];
+in
+  pkgs.mkShell {
+    packages = packagesFromNixpkgs ++ packagesFromLocalRepo;
+    shellHook = ''
+      export name=workEnv
+    '';
+  }
