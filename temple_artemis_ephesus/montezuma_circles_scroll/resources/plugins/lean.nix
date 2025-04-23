@@ -1,5 +1,5 @@
-{ lib }:
-lib.typecheck "PluginSlice" {
+{ libs }:
+libs.typechecklib.typecheck "PluginSlice" {
   #lean4 lang
   lean = {
     enable = true;

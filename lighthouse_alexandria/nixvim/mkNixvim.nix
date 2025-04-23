@@ -2,12 +2,14 @@
 let 
   argToNixvimMaker = {
     module = etc // {
-      inherit opts;
+      opts = import opts { inherit lib; };
       inherit filetype;
       inherit keymaps;
       extraConfigLua = lib.concatAttrSets extraConfigLuaList;
       inherit extraPlugins;
-      plugins = lib.concatAttrSets pluginsList;
+      plugins = let
+          importMapping = builtins.map (path: import path { inherit lib;});
+      in lib.concatAttrSets importMapping;
     };
   };
 in

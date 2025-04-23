@@ -1,5 +1,5 @@
-{ lib }:
-lib.typecheck "PluginSlice" {
+{ libs }:
+libs.typechecklib.typecheck "PluginSlice" {
   #is not in lsp.nix because is not in nixvim's lsp attrs
   pylsp = {
     enable = true;

@@ -1,9 +1,9 @@
 { flakeInputs }:
 let
-  lib = flakeInputs.lighthouseAlexandria;
+  baselib = flakeInputs.lighthouseAlexandria.baselib;
 in
 {
-  baseEnv = lib.mkNixvim (import ./envAttrs/base.nix {});
-  leanEnv = lib.mkNixvim (import ./envAttrs/forLean.nix {});
-  webDevEnv = lib.mkNixvim (import ./envAttrs/forWebDev.nix {});
+  baseEnv = baselib.mkNixvim (import ./envAttrs/base.nix {});
+  leanEnv = baselib.mkNixvim (import ./envAttrs/forLean.nix {});
+  webDevEnv = baselib.mkNixvim (import ./envAttrs/forWebDev.nix {});
 }

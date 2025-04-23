@@ -1,5 +1,6 @@
-{ lib }:
-lib.typecheck "PluginSlice" {
+{ libs, activateDebug ? false }:
+let total = {
+  final = {
     cmp = {
     enable = true;
     autoEnableSources = true;
@@ -44,4 +45,9 @@ lib.typecheck "PluginSlice" {
   cmp-zsh.enable = true;
   cmp-path.enable = true;
   cmp_luasnip.enable = true;
+  };
+}; 
+in libs.typechecklib.tc {
+    typeName = "PluginSlice";
+    inherit total;
 }

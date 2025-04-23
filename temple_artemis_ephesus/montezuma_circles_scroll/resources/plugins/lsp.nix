@@ -1,4 +1,5 @@
-{
+{ libs }:
+let total.final = {
   lsp = {
     enable = true;
     servers = {
@@ -32,4 +33,8 @@
       };
     };
   };
+}; in libs.typechecklib.tc
+{
+  typeName = "SingleFieldAttrs";
+  inherit total;
 }

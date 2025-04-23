@@ -1,6 +1,6 @@
-{ lib }:
+{ libs }:
 {
-  NixvimEnvAttrs = lib.attrsSubtype {
+  NixvimEnvAttrs = libs.baselib.attrsSubtype {
     fields = [
       "plugins"
       "filetype"
@@ -8,20 +8,20 @@
       "extraConfigLua"
       "extraPackages"
     ];
-    predicates = with lib.predicates; [
-      nonemptyAttrs
+    predicates =  [
+      "nonEmptyAttrs"
     ];
   };
-  PluginSlice = lib.attrsSubtype {
+  PluginSlice = libs.baselib.attrsSubtype {
     fields = [];
-    predicates = with lib.predicates; [
-      nonemptyAttrs
+    predicates = [
+      "nonEmptyAttrs"
     ];
   };
-  SingleFieldAttrs = lib.attrsSubtype {
+  SingleFieldAttrs = libs.baselib.attrsSubtype {
     fields = [];
-    predicates = with lib.predicates; [
-      singleFieldAttrs
+    predicates = [
+      "singleFieldAttrs"
     ];
   };
 }

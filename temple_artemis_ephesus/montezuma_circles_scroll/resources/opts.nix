@@ -1,5 +1,5 @@
-{ lib }:
-lib.typecheck "SingleFieldAttrs" {
+{ libs }:
+let total.final = {
     opts = {
       number = true; #show line numbers
       relativenumber = false; #show relative line numbers
@@ -29,4 +29,8 @@ lib.typecheck "SingleFieldAttrs" {
       foldenable = true;
     };
 
+}; in libs.typechecklib.tc 
+{
+  typeName = "SingleFieldAttrs";
+  inherit total;
 }

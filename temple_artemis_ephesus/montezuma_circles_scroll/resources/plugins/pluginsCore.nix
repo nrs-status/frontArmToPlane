@@ -1,5 +1,5 @@
-{ lib }:
-lib.typecheck "PluginsSlice" {
+{ libs }:
+libs.typechecklib.typecheck "PluginsSlice" {
   #find-next-character motion
   hop = {
     enable = true;
