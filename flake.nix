@@ -28,7 +28,7 @@
           workEnv
         ];
         packagesToProvide = myPkgs: with myPkgs; [
-          myPkgs
+          nixvim.base
         ];
       };
     in
