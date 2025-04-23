@@ -234,8 +234,8 @@
         "nixvimFlake": "nixvimFlake"
       },
       "locked": {
-        "lastModified": 1745424175,
-        "narHash": "sha256-1OeOfWHiNYQju79E3ap61ZnS5Q5V4K4UdQVcPezIFMg=",
+        "lastModified": 1745427857,
+        "narHash": "sha256-/jgmhquGTLJfi8zib501LO09KZWI0LGZD6KHaNK0GkQ=",
         "path": "/home/sieyes/baghdad_plane/flakes/lighthouseAlexandria",
         "type": "path"
       },
@@ -250,11 +250,11 @@
         "nixvimFlake": "nixvimFlake_2"
       },
       "locked": {
-        "lastModified": 1745426831,
-        "narHash": "sha256-EeK0H5NC2UOIPltENSNt9GDGFC+50xjND+J9RCFb7S4=",
+        "lastModified": 1745432703,
+        "narHash": "sha256-szq6GyW0vo/rwFQjymz5lQUECkO7+2ZQ6Z+MOaLuUow=",
         "owner": "nrs-status",
         "repo": "lighthouseAlexandria",
-        "rev": "bbc584acc7c478ccdb754d5fa939241dccbc8df5",
+        "rev": "9870582c3de11340d7d754165a58510ce9fd5a3f",
         "type": "github"
       },
       "original": {

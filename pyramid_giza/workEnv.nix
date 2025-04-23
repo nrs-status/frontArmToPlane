@@ -1,5 +1,6 @@
-{ pkgs, myPkgs }:
-let 
+{ inputs, myPkgs, activateDebug ? false }:
+let total = rec { 
+  pkgs = inputs.pkgs;
   packagesFromNixpkgs = with pkgs; [
     nix-index #allows finding what packages provide dependencies for auto-patchelf
     git
@@ -13,14 +14,20 @@ let
     #for some builds
     zlib
 
+    #
+
   ];
   packagesFromLocalRepo = with myPkgs; [
     nixvim.base
   ];
-in
-  pkgs.mkShell {
-    packages = packagesFromNixpkgs ++ packagesFromLocalRepo;
-    shellHook = ''
-      export name=workEnv
-    '';
-  }
+  shellHook = ''
+    export name=workEnv
+  '';
+  final = total.pkgs.mkShell {
+    packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
+    shellHook = total.shellHook;
+  };
+}; in inputs.libs.baselib.withDebug activateDebug {
+  nondebug = total.final;
+  debug = total;
+}
