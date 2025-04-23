@@ -1,7 +1,8 @@
-{ libs }:
-libs.typechecklib.typecheck "PluginSlice" {
+{ inputs, ... }:
+inputs.libs.typechecklib.tc {
+  typeName = "PluginSlice";
   #is not in lsp.nix because is not in nixvim's lsp attrs
-  pylsp = {
+  total.final = { pylsp = {
     enable = true;
     package = null;
     settings = {
@@ -11,4 +12,4 @@ libs.typechecklib.typecheck "PluginSlice" {
       };
     };
   };
-}
+};}

@@ -15,7 +15,7 @@ let
 
   ];
   packagesFromLocalRepo = with myPkgs; [
-    montezuma_circles_scroll.baseEnv
+    baseEnv
   ];
 in
   pkgs.mkShell {

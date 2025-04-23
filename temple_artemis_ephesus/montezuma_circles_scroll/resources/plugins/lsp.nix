@@ -1,4 +1,4 @@
-{ libs }:
+{ inputs, ... }:
 let total.final = {
   lsp = {
     enable = true;
@@ -16,7 +16,7 @@ let total.final = {
       };
 
       ocamllsp = {
-        enablue = true;
+        enable = true;
         package = null;
       };
 
@@ -33,7 +33,7 @@ let total.final = {
       };
     };
   };
-}; in libs.typechecklib.tc
+}; in inputs.libs.typechecklib.tc
 {
   typeName = "SingleFieldAttrs";
   inherit total;

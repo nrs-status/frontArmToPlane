@@ -1,5 +1,6 @@
-{ libs, activateDebug ? false }:
-let total = {
+{ inputs, system, activateDebug ? false, ... }:
+let 
+  total = {
   final = {
     cmp = {
     enable = true;
@@ -47,7 +48,7 @@ let total = {
   cmp_luasnip.enable = true;
   };
 }; 
-in libs.typechecklib.tc {
+in inputs.libs.typechecklib.tc {
     typeName = "PluginSlice";
     inherit total;
 }

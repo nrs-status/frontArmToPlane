@@ -1,7 +1,8 @@
-{ libs }:
-libs.typechecklib.typecheck "PluginSlice" {
+{ inputs, ... }:
+inputs.libs.typechecklib.tc {
+  typeName = "PluginSlice";
   #lean4 lang
-  lean = {
+  total.final = { lean = {
     enable = true;
     leanPackage = null; #todo: make it so it uses project lakefile 
     abbreviations = {
@@ -17,4 +18,5 @@ libs.typechecklib.typecheck "PluginSlice" {
     mappings = true;
     
   };
+};
 }

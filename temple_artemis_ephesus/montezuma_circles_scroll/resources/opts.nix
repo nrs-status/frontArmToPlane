@@ -1,4 +1,4 @@
-{ libs }:
+{ inputs, ... }:
 let total.final = {
     opts = {
       number = true; #show line numbers
@@ -29,7 +29,7 @@ let total.final = {
       foldenable = true;
     };
 
-}; in libs.typechecklib.tc 
+}; in inputs.libs.typechecklib.tc 
 {
   typeName = "SingleFieldAttrs";
   inherit total;

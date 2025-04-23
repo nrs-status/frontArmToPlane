@@ -1,3 +1,4 @@
+{...}:
 [
     #recursive unfold in current foldable
     {

@@ -1,18 +1,26 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
-    nixvimFlakeInput.url = "github:nix-community/nixvim";
+    nixvimFlake.url = "github:nix-community/nixvim";
     lighthouseAlexandria.url = "github:nrs-status/lighthouseAlexandria";
+    colossusRhodes.url = "github:nrs-status/colossusRhodes";
   };
 
   outputs = inputs: 
     let 
       output1 = {
-	#although it looks like we're just repeating the inputs, the idea is to make it easy to create new output blocks with different inputs, in case we need new packages but don't have time to update everything 
         inputs = {
-	  nixpkgs = inputs.nixpkgs;
-	  nixvimFlakeInput = inputs.nixvimFlakeInput;
-	};
+          #nixpkgs = inputs.nixpkgs;
+          pkgs = import inputs.nixpkgs {};
+	  nixvimFlake = inputs.nixvimFlake;
+          libs = {
+            baselib = inputs.lighthouseAlexandria.baselib;
+            pkgslib = inputs.lighthouseAlexandria.pkgslib;
+            typechecklib = inputs.colossusRhodes.typechecklib {
+              typesSource = ./mauso_halicarnassus;
+            };
+          };
+        };
         supportedSystems = [
           "x86_64-linux"
         ];
@@ -20,6 +28,7 @@
           workEnv
         ];
         packagesToProvide = myPkgs: with myPkgs; [
+          myPkgs
         ];
       };
     in
@@ -29,6 +38,7 @@
         outputsList = [
           output1
         ];
+        activateDebug = true;
       };
 
 }

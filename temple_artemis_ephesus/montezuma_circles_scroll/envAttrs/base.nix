@@ -1,3 +1,4 @@
+{ ... }:
 {
   symlinkJoinName = "baseNixvimEnv";
   etc = ../resources/etc.nix;
@@ -10,7 +11,7 @@
   ];
   filetype = {};
   extraPlugins = [];
-  extraConfigLuaList = builtins.map (path: ../extraConfigLua + path) [
+  extraConfigLuaList = builtins.map (path: ../resources/extraConfigLua + path) [
     /rememberFolds.lua
     /tabKeyFunc.lua
     /toggleAbsRelNums.lua

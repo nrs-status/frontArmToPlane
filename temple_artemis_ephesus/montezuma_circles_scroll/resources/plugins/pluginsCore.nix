@@ -1,6 +1,8 @@
-{ libs }:
-libs.typechecklib.typecheck "PluginsSlice" {
+{ inputs, ... }:
+inputs.libs.typechecklib.tc {
+  typeName = "PluginSlice";
   #find-next-character motion
+  total.final = {
   hop = {
     enable = true;
   };
@@ -126,4 +128,5 @@ libs.typechecklib.typecheck "PluginsSlice" {
 
   #adds pictograms to lsp
   lspkind.enable = true;
+};
 }

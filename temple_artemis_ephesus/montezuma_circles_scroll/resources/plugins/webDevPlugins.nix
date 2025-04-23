@@ -1,6 +1,7 @@
-{ libs }:
-libs.typechecklib.typecheck "PluginSlice" {
-  ts-autotag = {
+{ inputs, ... }:
+inputs.libs.typechecklib.tc {
+  typeName = "PluginSlice";
+  total.final = { ts-autotag = {
     enable = true;
   };
 
@@ -31,4 +32,5 @@ libs.typechecklib.typecheck "PluginSlice" {
     tsserver.enable = true;
     eslint.enable = true;
   };
+};
 }
