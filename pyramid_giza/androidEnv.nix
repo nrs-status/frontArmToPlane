@@ -7,4 +7,4 @@ inputs.libs.baselib.extendEnv {
   ];
   newLocalPackageList = [];
   shellHookExtension = '''';
-};
+}
