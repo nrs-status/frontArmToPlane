@@ -11,7 +11,7 @@
       output1 = {
         inputs = {
           #nixpkgs = inputs.nixpkgs;
-          pkgs = import inputs.nixpkgs {};
+          pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
 	  nixvimFlake = inputs.nixvimFlake;
           libs = {
             baselib = inputs.lighthouseAlexandria.baselib;
@@ -38,7 +38,6 @@
         outputsList = [
           output1
         ];
-        activateDebug = true;
       };
 
 }

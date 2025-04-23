@@ -250,11 +250,11 @@
         "nixvimFlake": "nixvimFlake_2"
       },
       "locked": {
-        "lastModified": 1745423072,
-        "narHash": "sha256-Ym4g2yDZrQq/CAEtg83cJocu9dUDGc5Cbe+zjCF8aF4=",
+        "lastModified": 1745426831,
+        "narHash": "sha256-EeK0H5NC2UOIPltENSNt9GDGFC+50xjND+J9RCFb7S4=",
         "owner": "nrs-status",
         "repo": "lighthouseAlexandria",
-        "rev": "7a74e8ae6b622bdaa7057a3b91852ab94a99ad3f",
+        "rev": "bbc584acc7c478ccdb754d5fa939241dccbc8df5",
         "type": "github"
       },
       "original": {
@@ -297,11 +297,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1744932701,
-        "narHash": "sha256-fusHbZCyv126cyArUwwKrLdCkgVAIaa/fQJYFlCEqiU=",
+        "lastModified": 1745234285,
+        "narHash": "sha256-GfpyMzxwkfgRVN0cTGQSkTC0OHhEkv3Jf6Tcjm//qZ0=",
         "owner": "NixOs",
         "repo": "nixpkgs",
-        "rev": "b024ced1aac25639f8ca8fdfc2f8c4fbd66c48ef",
+        "rev": "c11863f1e964833214b767f4a369c6e6a7aba141",
         "type": "github"
       },
       "original": {

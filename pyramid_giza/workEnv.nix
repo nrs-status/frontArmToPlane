@@ -15,7 +15,7 @@ let
 
   ];
   packagesFromLocalRepo = with myPkgs; [
-    baseEnv
+    nixvim.base
   ];
 in
   pkgs.mkShell {
