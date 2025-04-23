@@ -15,8 +15,7 @@ let
 
   ];
   packagesFromLocalRepo = with myPkgs; [
-    kitties.kitty
-    montezuma_circles_scroll.all
+    montezuma_circles_scroll.baseEnv
   ];
 in
   pkgs.mkShell {

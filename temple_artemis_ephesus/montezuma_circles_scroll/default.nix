@@ -1,9 +1,12 @@
 { flakeInputs }:
 let
   baselib = flakeInputs.lighthouseAlexandria.baselib;
+  mkNixvim = baselib.preMkNixvim {
+    pkgs = throw "montezuma_circles_scroll/default.nix: on hold while we add a method of creating a nixvimMaker during mkOutput;"
+  };
 in
 {
-  baseEnv = baselib.mkNixvim (import ./envAttrs/base.nix {});
-  leanEnv = baselib.mkNixvim (import ./envAttrs/forLean.nix {});
-  webDevEnv = baselib.mkNixvim (import ./envAttrs/forWebDev.nix {});
+  baseEnv = baselib.mkNixvim (argStart // import ./envAttrs/base.nix {});
+  leanEnv = baselib.mkNixvim (argStart // import ./envAttrs/forLean.nix {});
+  webDevEnv = baselib.mkNixvim (argStart // import ./envAttrs/forWebDev.nix {});
 }

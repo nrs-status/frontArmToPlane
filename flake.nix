@@ -23,7 +23,7 @@
         ];
       };
     in
-      inputs.lighthouseAlexandria.lib.mkOutput {
+      inputs.lighthouseAlexandria.baselib.mkOutput {
         envsdir = ./pyramid_giza;
         mypkgsdir = ./temple_artemis_ephesus;
         outputsList = [
