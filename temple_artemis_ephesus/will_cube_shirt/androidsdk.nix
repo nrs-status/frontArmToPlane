@@ -19,6 +19,6 @@ let total = rec {
   };
   final = composition;
 
-}; in inputs.libs.baselib.wrapDebug {
+}; in inputs.baselib.wrapDebug {
   inherit total activateDebug;
 }
