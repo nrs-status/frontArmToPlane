@@ -1,5 +1,5 @@
 { inputs, ... }:
-inputs.libs.typechecklib.tc {
+inputs.tclib.tc {
   typeName = "PluginSlice";
   #find-next-character motion
   total.final = {

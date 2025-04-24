@@ -33,7 +33,7 @@ let total.final = {
       };
     };
   };
-}; in inputs.libs.typechecklib.tc
+}; in inputs.tclib.tc
 {
   typeName = "SingleFieldAttrs";
   inherit total;

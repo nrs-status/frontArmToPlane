@@ -6,10 +6,6 @@ let
     inherit typeName;
     target = total.final;
   };
-in baselib.withDebug activateDebug {
-    debug = {
-      inherit total;
-      inherit typecheckResult;
-    };
-    nondebug = typecheckResult;
+in baselib.wrapDebug {
+  inherit total activateDebug;
 }

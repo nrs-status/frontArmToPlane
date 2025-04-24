@@ -5,5 +5,5 @@
     filePath = ./predicates;
     inputForImportPairs = {};
   };
-  tc = import ./tc.nix { inherit typesSource; };
+  tc = import ./tc.nix { inherit baselib pkgslib typesSource; };
 }

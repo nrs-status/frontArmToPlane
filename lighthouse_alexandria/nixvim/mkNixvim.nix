@@ -13,7 +13,7 @@ let total = rec {
       inherit extraPlugins;
       plugins = let
           importMapping = builtins.map (path: import path { inherit inputs; inherit system;}) pluginsList;
-      in inputs.libs.baselib.concatAttrSets importMapping;
+      in inputs.baselib.concatAttrSets importMapping;
     };
   }; 
 };

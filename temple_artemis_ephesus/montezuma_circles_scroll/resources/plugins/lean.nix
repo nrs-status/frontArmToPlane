@@ -1,5 +1,5 @@
 { inputs, ... }:
-inputs.libs.typechecklib.tc {
+inputs.tclib.tc {
   typeName = "PluginSlice";
   #lean4 lang
   total.final = { lean = {

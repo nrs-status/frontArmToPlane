@@ -9,7 +9,7 @@
         pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
-        tclib = import ./colossus_rhodes { inherit pkgs; typesSource = ./mauso_halicarnassus; };
+        tclib = import ./colossus_rhodes { inherit baselib pkgslib; typesSource = ./mauso_halicarnassus; };
         outputDecl1 = {
           inputs = rec {
             inherit pkgs pkgslib baselib tclib;

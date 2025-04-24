@@ -1,6 +1,6 @@
 { inputs, system }:
 let
-  mkNixvim = inputs.libs.baselib.preMkNixvim {
+  mkNixvim = inputs.baselib.preMkNixvim {
     inherit inputs;
     inherit system;
   };

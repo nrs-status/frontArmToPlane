@@ -1,5 +1,5 @@
 { inputs, ... }:
-inputs.libs.typechecklib.tc {
+inputs.tclib.tc {
   typeName = "PluginSlice";
   total.final = { ts-autotag = {
     enable = true;

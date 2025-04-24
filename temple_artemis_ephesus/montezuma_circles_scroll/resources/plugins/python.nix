@@ -1,5 +1,5 @@
 { inputs, ... }:
-inputs.libs.typechecklib.tc {
+inputs.tclib.tc {
   typeName = "PluginSlice";
   #is not in lsp.nix because is not in nixvim's lsp attrs
   total.final = { pylsp = {

@@ -48,7 +48,7 @@ let
   cmp_luasnip.enable = true;
   };
 }; 
-in inputs.libs.typechecklib.tc {
+in inputs.tclib.tc {
     typeName = "PluginSlice";
     inherit total;
 }

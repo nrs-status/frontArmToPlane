@@ -27,7 +27,6 @@ let total = rec {
     packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
     shellHook = total.shellHook;
   };
-}; in inputs.libs.baselib.withDebug activateDebug {
-  nondebug = total.final;
-  debug = total;
+}; in inputs.baselib.wrapDebug {
+  inherit total activateDebug;
 }

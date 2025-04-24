@@ -1,5 +1,5 @@
 { inputs, myPkgs, activateDebug ? false }:
-inputs.libs.baselib.extendEnv {
+inputs.baselib.extendEnv {
   inherit inputs myPkgs activateDebug;
   target = ./workEnv.nix;
   newNixpkgsPackageList = [];
