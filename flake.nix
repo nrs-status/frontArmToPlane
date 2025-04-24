@@ -6,7 +6,10 @@
 
   outputs = inputs: 
       let total = rec {
-        pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+        pkgs = import inputs.nixpkgs { 
+          system = "x86_64-linux"; 
+          allowUnfree = true;
+        };
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
         tclib = import ./colossus_rhodes { inherit baselib pkgslib; typesSource = ./mauso_halicarnassus; };
@@ -34,6 +37,11 @@
             outputDecl1
           ];
         };
+        myPkgs = baselib.mkMyPkgs {
+          inputs = outputDecl1.inputs;
+          system = "x86_64-linux";
+          mypkgsdir = ./temple_artemis_ephesus;
+        };
       };
-    in total.mkOutputResult;
+      in total.mkOutputResult // { myPkgs = total.myPkgs; };
 }
