@@ -1,4 +1,4 @@
-{ libs }:
+{ baselib, pkgslib }:
 { type, typeName, target, activateDebug ? false }:
 let total = rec {
   expectedFields = type.fields;
@@ -15,7 +15,7 @@ let total = rec {
     target
   else
       throw ("typecheckFields.nix: failure to typecheck " + typeName + "; the following fields are missing: " + (builtins.toString filtering)); };
-in libs.baselib.withDebug activateDebug {
+in baselib.withDebug activateDebug {
     debug = total;
     nondebug = total.final;
 }

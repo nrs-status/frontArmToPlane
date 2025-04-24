@@ -1,9 +1,9 @@
-{ libs }:
+{ baselib, pkgslib }:
 { type, typeName, target }:
 let
-  predicatesOfType = (import ./constructPredicatesFromPredicateList.nix { inherit libs; }) type.predicates;
+  predicatesOfType = (import ./constructPredicatesFromPredicateList.nix { inherit baselib pkgslib; }) type.predicates;
   mapping = builtins.mapAttrs (field: val: val.function target) predicatesOfType;
-  filtering = libs.pkgslib.filterAttrs (field: val: val == false) mapping;
+  filtering = pkgslib.filterAttrs (field: val: val == false) mapping;
 in
   if builtins.length (builtins.attrNames filtering) == 0 then
     target

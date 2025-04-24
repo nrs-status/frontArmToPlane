@@ -1,11 +1,11 @@
-{ libs, typesSource }:
+{ baselib, pkgslib, typesSource }:
 { typeName, target }:
 let 
-  typecheckFields = import ./typecheckFields.nix { inherit libs; };
-  typecheckPredicates = import ./typecheckPredicates.nix { inherit libs; };
-  importedTypesSource = (libs.baselib.importPairAttrsOfDir {
+  typecheckFields = import ./typecheckFields.nix { inherit baselib pkgslib; };
+  typecheckPredicates = import ./typecheckPredicates.nix { inherit baselib pkgslib; };
+  importedTypesSource = (baselib.importPairAttrsOfDir {
     filePath = typesSource;
-    inputForImportPairs = { inherit libs; };
+    inputForImportPairs = { inherit baselib pkgslib; };
   }).types;
   type = importedTypesSource.${typeName};
 in

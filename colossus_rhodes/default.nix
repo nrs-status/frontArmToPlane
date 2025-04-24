@@ -1,9 +1,9 @@
-{ libs, typesSource }:
+{ baselib, pkgslib , typesSource }:
 {
-  typecheck = import ./typecheck.nix { inherit libs; inherit typesSource; };
-  predicates = libs.baselib.importPairAttrsOfDir {
+  typecheck = import ./typecheck.nix { inherit baselib pkgslib typesSource; };
+  predicates = baselib.importPairAttrsOfDir {
     filePath = ./predicates;
     inputForImportPairs = {};
   };
-  tc = import ./tc.nix { inherit libs; inherit typesSource; };
+  tc = import ./tc.nix { inherit typesSource; };
 }

@@ -1,7 +1,7 @@
-{ libs }:
+{ baselib, pkgslib }:
 predicateList:
-  let predicatesLib = libs.baselib.importPairAttrsOfDir {
+  let predicatesLib = baselib.importPairAttrsOfDir {
     filePath = ./predicates;
     inputForImportPairs = {};
   }; in
-libs.pkgslib.filterAttrs (name: val: builtins.elem name predicateList) predicatesLib
+pkgslib.filterAttrs (name: val: builtins.elem name predicateList) predicatesLib

@@ -8,7 +8,7 @@
       let total = rec {
         pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
         pkgslib = pkgs.lib;
-        baselib = import ./lighthouse_alexandria { inherit pkgs; } { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
+        baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
         tclib = import ./colossus_rhodes { inherit pkgs; typesSource = ./mauso_halicarnassus; };
         outputDecl1 = {
           inputs = rec {
