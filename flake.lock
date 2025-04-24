@@ -250,11 +250,11 @@
         "nixvimFlake": "nixvimFlake_2"
       },
       "locked": {
-        "lastModified": 1745432703,
-        "narHash": "sha256-szq6GyW0vo/rwFQjymz5lQUECkO7+2ZQ6Z+MOaLuUow=",
+        "lastModified": 1745460960,
+        "narHash": "sha256-qdm0D++n6yvINO+S0KSa//rafnZwuO7zmi4+Py0+4kk=",
         "owner": "nrs-status",
         "repo": "lighthouseAlexandria",
-        "rev": "9870582c3de11340d7d754165a58510ce9fd5a3f",
+        "rev": "b12f14f79e21f9e2352c65d09a19cf926e85ee1d",
         "type": "github"
       },
       "original": {

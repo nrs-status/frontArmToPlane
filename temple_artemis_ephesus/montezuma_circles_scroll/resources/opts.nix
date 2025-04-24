@@ -1,6 +1,5 @@
 { inputs, ... }:
 let total.final = {
-    opts = {
       number = true; #show line numbers
       relativenumber = false; #show relative line numbers
 
@@ -27,10 +26,5 @@ let total.final = {
       foldlevel = 99;
       foldlevelstart = 99;
       foldenable = true;
-    };
 
-}; in inputs.libs.typechecklib.tc 
-{
-  typeName = "SingleFieldAttrs";
-  inherit total;
-}
+}; in total.final

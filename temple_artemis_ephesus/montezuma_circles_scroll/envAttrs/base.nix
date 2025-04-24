@@ -15,7 +15,6 @@
     /rememberFolds.lua
     /tabKeyFunc.lua
     /toggleAbsRelNums.lua
-    /setupNvimSurround.lua
   ];
   extraPackages = [];
 }

@@ -10,7 +10,6 @@
     let 
       output1 = {
         inputs = {
-          #nixpkgs = inputs.nixpkgs;
           pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
 	  nixvimFlake = inputs.nixvimFlake;
           libs = {
@@ -24,18 +23,19 @@
         supportedSystems = [
           "x86_64-linux"
         ];
-        envsToProvide = envs: with envs; [
-          workEnv
+        envsToProvide = [
+          "workEnv"
+          "androidEnv"
         ];
-        packagesToProvide = myPkgs: with myPkgs; [
-          nixvim.base
+        packagesToProvide = [
+          [ "nixvim" "base" ]
         ];
       };
     in
       inputs.lighthouseAlexandria.baselib.mkOutput {
         envsdir = ./pyramid_giza;
         mypkgsdir = ./temple_artemis_ephesus;
-        outputsList = [
+        outputDeclList = [
           output1
         ];
       };

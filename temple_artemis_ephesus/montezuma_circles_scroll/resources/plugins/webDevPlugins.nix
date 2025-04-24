@@ -7,10 +7,9 @@ inputs.libs.typechecklib.tc {
 
   colorizer = {
     enable = true;
-    userDefaultOptions = {
-      css = true;
-      tailwind = true;
-    };
+    settings.filetypes = [
+      "css"
+    ];
   };
 
   #color picker and highlighter
