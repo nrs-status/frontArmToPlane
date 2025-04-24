@@ -1,16 +1,21 @@
-{ inputs, myPkgs, target, newNixpkgsPackageList, newLocalPackageList, shellHookExtension, activateDebug ? false }:
+{ inputs, myPkgs, activateDebug, target, extension }:
+with inputs;
 let total = rec {
-  targetTotal = import target {
+  targetTotal = (import target {
     inherit inputs myPkgs;
     activateDebug = true;
-  }; 
-  resultingNixpkgsPackageList = targetTotal.packagesFromNixpkgs ++ newNixpkgsPackageList;
-  resultingLocalPackageList = targetTotal.packagesFromLocalRepo ++ newLocalPackageList;
-  resultingShellHook = targetTotal.shellHook + shellHookExtension;
+  });
+  newEnvDecl = extension (with targetTotal; {
+    inherit packagesFromNixpkgs packagesFromLocalRepo shellHook;
+  });
+  pkgs = targetTotal.pkgs;
+  packagesFromNixpkgs = newEnvDecl.packagesFromNixpkgs;
+  packagesFromLocalRepo = newEnvDecl.packagesFromLocalRepo;
+  shellHook = newEnvDecl.shellHook;
   final = targetTotal.pkgs.mkShell {
-    packages = resultingNixpkgsPackageList ++ resultingLocalPackageList;
-    shellHook = resultingShellHook;
+    packages = packagesFromNixpkgs ++ packagesFromLocalRepo;
+    inherit shellHook;
   };
-}; in inputs.baselib.wrapDebug {
-  inherit activateDebug total;
-}
+}; in baselib.wrapDebug {
+  inherit total activateDebug;
+};

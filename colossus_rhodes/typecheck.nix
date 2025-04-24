@@ -1,13 +1,8 @@
-{ baselib, pkgslib, typesSource }:
-{ typeName, target }:
+{ baselib, pkgslib }:
+{ type, target }:
 let 
   typecheckFields = import ./typecheckFields.nix { inherit baselib pkgslib; };
   typecheckPredicates = import ./typecheckPredicates.nix { inherit baselib pkgslib; };
-  importedTypesSource = (baselib.importPairAttrsOfDir {
-    filePath = typesSource;
-    inputForImportPairs = { inherit baselib pkgslib; };
-  }).types;
-  type = importedTypesSource.${typeName};
 in
   if type.declType == "attrsSubtype" then
     if !(builtins.isAttrs target) then

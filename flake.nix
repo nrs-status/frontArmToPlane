@@ -8,6 +8,7 @@
       let total = rec {
         pkgs = import inputs.nixpkgs { 
           system = "x86_64-linux"; 
+          config.allowUnfree = true;
         };
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
@@ -26,7 +27,7 @@
           ];
           packagesToProvide = [
             [ "nixvim" "base" ]
-            "androidsdk"
+            "androidSdk"
           ];
         };
         mkOutputResult = baselib.mkOutput {

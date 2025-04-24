@@ -1,5 +1,5 @@
 { pkgslib }:
-{ reader, mypkgsdir, envsdir, activateDebug ? false}:
+{ reader, mypkgsdir, envsdir, activateDebug ? false }:
 let total = rec {
   mkMyPkgs = import ./mkMyPkgs.nix { inherit pkgslib; };
   myPkgs = mkMyPkgs {

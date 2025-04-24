@@ -1,4 +1,4 @@
-{ baselib, pkgslib , typesSource }:
+{ baselib, pkgslib }:
 {
   typecheck = import ./typecheck.nix { inherit baselib pkgslib typesSource; };
   predicates = baselib.importPairAttrsOfDir {
