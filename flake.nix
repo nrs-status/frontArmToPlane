@@ -2,43 +2,38 @@
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixvimFlake.url = "github:nix-community/nixvim";
-    lighthouseAlexandria.url = "github:nrs-status/lighthouseAlexandria";
   };
 
   outputs = inputs: 
-    let 
-      output1 = {
-        inputs = rec {
-          pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-	  nixvimFlake = inputs.nixvimFlake;
-          libs = {
-            baselib = inputs.lighthouseAlexandria.baselib { inherit pkgs; };
-            pkgslib = pkgs.lib;
-            tclib = inputs.lighthouseAlexandria.tclib {
-              inherit pkgs;
-              typesSource = ./mauso_halicarnassus;
-            };
+      let total = rec {
+        pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+        pkgslib = pkgs.lib;
+        baselib = import ./lighthouse_alexandria { inherit pkgs; } { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
+        tclib = import ./colossus_rhodes { inherit pkgs; typesSource = ./mauso_halicarnassus; };
+        outputDecl1 = {
+          inputs = rec {
+            inherit pkgs pkgslib baselib tclib;
+            nixvimFlake = inputs.nixvimFlake;
           };
+          supportedSystems = [
+            "x86_64-linux"
+          ];
+          envsToProvide = [
+            "workEnv"
+            "androidEnv"
+          ];
+          packagesToProvide = [
+            [ "nixvim" "base" ]
+            "androidsdk"
+          ];
         };
-        supportedSystems = [
-          "x86_64-linux"
-        ];
-        envsToProvide = [
-          "workEnv"
-          "androidEnv"
-        ];
-        packagesToProvide = [
-          [ "nixvim" "base" ]
-          "androidsdk"
-        ];
+        mkOutputResult = baselib.mkOutput {
+          envsdir = ./pyramid_giza;
+          mypkgsdir = ./temple_artemis_ephesus;
+          outputDeclList = [
+            outputDecl1
+          ];
+        };
       };
-    in
-      inputs.lighthouseAlexandria.baselib.mkOutput {
-        envsdir = ./pyramid_giza;
-        mypkgsdir = ./temple_artemis_ephesus;
-        outputDeclList = [
-          output1
-        ];
-      };
-
+    in total.mkOutputResult;
 }
