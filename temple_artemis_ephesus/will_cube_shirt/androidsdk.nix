@@ -10,7 +10,7 @@ let total = rec {
     buildToolsVersions = [
       "34"
     ];
-    systemImageType = [ "google_apis_playstore" ];
+    systemImageTypes = [ "google_apis_playstore" ];
     abiVersions = [
       "x86_64"
     ];

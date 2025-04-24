@@ -4,7 +4,7 @@ inputs.libs.baselib.extendEnv {
   target = ./workEnv.nix;
   newNixpkgsPackageList = [];
   newLocalPackageList = [
-    androidsdk
+    "androidsdk"
   ];
   shellHookExtension = '''';
 }
