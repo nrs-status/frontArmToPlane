@@ -2,9 +2,9 @@
 inputs.libs.baselib.extendEnv {
   inherit inputs myPkgs activateDebug;
   target = ./workEnv.nix;
-  newNixpkgsPackageList = with inputs.pkgs; [
-    android-tools
+  newNixpkgsPackageList = [];
+  newLocalPackageList = [
+    androidsdk
   ];
-  newLocalPackageList = [];
   shellHookExtension = '''';
 }
