@@ -1,21 +1,20 @@
 { baselib, pkgslib }:
-{ type, typeName, target, activateDebug ? false }:
+{ type, target, activateDebug ? false }:
 let total = rec {
   expectedFields = type.fields;
   targetFields = builtins.attrNames target;
-  functionToMap = key: {
+  logMembership = key: {
     isInExpectedFields = builtins.elem key expectedFields;
     key = key;
   };
-  mapping = builtins.map functionToMap targetFields;
-  filterToApply = pair: pair.isInExpectedFields == false;
-  filtering = builtins.filter filterToApply mapping;
-  mainCondition = (builtins.length filtering == 0) || (builtins.length expectedFields == 0);
-  final = if mainCondition then
-    target
-  else
-      throw ("typecheckFields.nix: failure to typecheck " + typeName + "; the following fields are missing: " + (builtins.toString filtering)); };
-in baselib.withDebug activateDebug {
-    debug = total;
-    nondebug = total.final;
+  tagAnyMissing = builtins.map logMembership targetFields;
+  keepFailures = pair: pair.isInExpectedFields == false;
+  failures = builtins.filter keepFailures tagAnyMissing;
+  onlyKeys = builtins.map (attrs: attrs.key) failures;
+  mainCondition = (builtins.length onlyKeys == 0) || (builtins.length expectedFields) == 0;
+  throwBranch = throw ("typecheckFields.nix: failure to typecheck " + type.typeName + "; the following fields are unexpected: " + (builtins.toString onlyKeys));
+  final = if mainCondition then target else throwBranch;
+};
+in baselib.wrapDebug {
+  inherit activateDebug total;
 }

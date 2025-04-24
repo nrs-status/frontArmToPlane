@@ -1,8 +1,8 @@
 { inputs, ... }:
-inputs.tclib.tc {
-  typeName = "PluginSlice";
+with inputs;
+tc PluginSlice {
+
   #find-next-character motion
-  total.final = {
   hop = {
     enable = true;
   };
@@ -128,5 +128,4 @@ inputs.tclib.tc {
 
   #adds pictograms to lsp
   lspkind.enable = true;
-};
 }

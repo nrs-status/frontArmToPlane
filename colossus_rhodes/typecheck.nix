@@ -10,12 +10,10 @@ in
     else
     let result = typecheckFields {
         inherit type; 
-        inherit typeName;
         inherit target;
     };
     in typecheckPredicates {
         inherit type;
-        inherit typeName; 
         target = result;
     }
   else if type.declType == "subtype" then
@@ -23,7 +21,6 @@ in
       throw "typecheck.nix: target is attrs, wrap with attrsSubtype instead"
     else typecheckPredicates {
         inherit type; 
-        inherit typeName; 
         inherit target;
     }
   else

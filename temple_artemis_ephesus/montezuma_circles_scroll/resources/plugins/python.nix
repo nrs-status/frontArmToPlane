@@ -1,8 +1,6 @@
 { inputs, ... }:
-inputs.tclib.tc {
-  typeName = "PluginSlice";
-  #is not in lsp.nix because is not in nixvim's lsp attrs
-  total.final = { pylsp = {
+with inputs;
+tc PluginSlice { pylsp = {
     enable = true;
     package = null;
     settings = {
@@ -12,4 +10,4 @@ inputs.tclib.tc {
       };
     };
   };
-};}
+}

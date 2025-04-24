@@ -1,7 +1,8 @@
 { inputs }:
 with inputs; baselib.attrsSubtype {
   fields = [
-    "packages"
+    "packagesFromNixpkgs"
+    "packagesFromLocalRepo"
     "shellHook"
   ];
   predicates = [];

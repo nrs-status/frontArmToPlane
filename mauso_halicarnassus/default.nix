@@ -1,6 +1,6 @@
 { inputs }:
 with inputs;
-baselib.importPairAttrsOfDir {
+builtins.mapAttrs (key: val: val // {typeName = key;}) (baselib.importPairAttrsOfDir {
   filePath = ./.;
   inputForImportPairs = { inherit inputs; };
-}
+})

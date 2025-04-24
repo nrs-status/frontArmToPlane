@@ -1,7 +1,6 @@
 { inputs, ... }:
-inputs.tclib.tc {
-  typeName = "PluginSlice";
-  total.final = { ts-autotag = {
+with inputs;
+tc PluginSlice { ts-autotag = {
     enable = true;
   };
 
@@ -31,5 +30,4 @@ inputs.tclib.tc {
     tsserver.enable = true;
     eslint.enable = true;
   };
-};
 }

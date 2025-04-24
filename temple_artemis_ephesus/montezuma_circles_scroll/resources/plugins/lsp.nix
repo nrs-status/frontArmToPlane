@@ -1,4 +1,5 @@
 { inputs, ... }:
+with inputs;
 let total.final = {
   lsp = {
     enable = true;
@@ -33,8 +34,4 @@ let total.final = {
       };
     };
   };
-}; in inputs.tclib.tc
-{
-  typeName = "SingleFieldAttrs";
-  inherit total;
-}
+}; in tc SingleFieldAttrs total.final

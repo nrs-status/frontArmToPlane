@@ -16,13 +16,12 @@ let total = rec {
       in inputs.baselib.concatAttrSets importMapping;
     };
   }; 
-};
-in (import ../withDebug.nix activateDebug) {
-  debug = total;
-  nondebug = inputs.pkgs.symlinkJoin {
+  final = inputs.pkgs.symlinkJoin {
     name = symlinkJoinName;
     paths = [(total.nixvimMaker total.argToNixvimMaker)];
-    #paths = extraPackages ++ [ (total.nixvimMaker total.argToNixvimMaker) ];
+  };
 };
+in (import ../wrapDebug.nix) {
+  inherit activateDebug total;
 }
 

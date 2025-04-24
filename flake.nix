@@ -17,8 +17,8 @@
           inherit pkgslib baselib;
         }; };
         outputDecl1 = {
-          inputs = types // (rec {
-            inherit pkgs pkgslib baselib;
+          inputs = (types // rec {
+            inherit pkgs pkgslib baselib types;
             tc = tclib.tc;
             nixvimFlake = inputs.nixvimFlake;
           });

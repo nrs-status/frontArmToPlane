@@ -1,4 +1,4 @@
-{ inputs, myPkgs, activateDebug ? false }:
+args@{ inputs, myPkgs, activateDebug ? false }:
 let total = rec { 
   pkgs = inputs.pkgs;
   packagesFromNixpkgs = with pkgs; [
@@ -25,7 +25,10 @@ let total = rec {
   '';
   final = total.pkgs.mkShell {
     packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
-    shellHook = total.shellHook;
+    inherit shellHook;
+  };
+  debug = {
+    inherit args;
   };
 }; in inputs.baselib.wrapDebug {
   inherit total activateDebug;

@@ -1,7 +1,6 @@
 { inputs, system, activateDebug ? false, ... }:
-let 
-  total = {
-  final = {
+with inputs;
+let total.final = {
     cmp = {
     enable = true;
     autoEnableSources = true;
@@ -46,9 +45,5 @@ let
   cmp-zsh.enable = true;
   cmp-path.enable = true;
   cmp_luasnip.enable = true;
-  };
-}; 
-in inputs.tclib.tc {
-    typeName = "PluginSlice";
-    inherit total;
-}
+};
+in tc PluginSlice total.final

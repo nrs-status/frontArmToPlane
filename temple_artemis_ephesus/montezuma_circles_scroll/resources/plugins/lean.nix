@@ -1,8 +1,6 @@
 { inputs, ... }:
-inputs.tclib.tc {
-  typeName = "PluginSlice";
-  #lean4 lang
-  total.final = { lean = {
+with inputs;
+tc PluginSlice { lean = {
     enable = true;
     leanPackage = null; #todo: make it so it uses project lakefile 
     abbreviations = {
@@ -18,5 +16,4 @@ inputs.tclib.tc {
     mappings = true;
     
   };
-};
 }
