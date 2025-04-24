@@ -27,7 +27,7 @@ let total = rec {
     if builtins.isList attrs.key then
       pkgslib.attrsets.setAttrByPath attrs.key attrs.val
     else if builtins.isString attrs.key then
-      { attrs.key = attrs.val; }
+      { ${attrs.key} = attrs.val; }
     else throw "mkSelectedPkgs.nix wrong type for package label";
   deepMerge = import ./deepMerge.nix;
   foldIntoAttrs = builtins.foldl' deepMerge {} (builtins.map keyValPairsAsSingleKeyAttrs selectedPackagesAsKeyValPairs);

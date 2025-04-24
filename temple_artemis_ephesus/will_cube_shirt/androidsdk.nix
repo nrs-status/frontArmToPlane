@@ -2,7 +2,7 @@
 let total = rec {
   composition = inputs.pkgs.androidenv.composeAndroidPackages {
     cmdLineToolsVersion = [
-      "17"
+      "17.0"
     ];
     platformVersions = [
       "35"
@@ -15,7 +15,7 @@ let total = rec {
       "x86_64"
     ];
   includeEmulator = true;
-  emulatorVersion = "35.4.9.0";
+  emulatorVersion = "35.6.2";
   };
   final = composition;
 
