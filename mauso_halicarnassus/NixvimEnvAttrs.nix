@@ -10,4 +10,4 @@ with inputs; baselib.attrsSubtype {
     predicates =  [
       "nonEmptyAttrs"
     ];
-};
+}

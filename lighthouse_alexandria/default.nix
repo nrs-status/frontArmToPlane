@@ -7,7 +7,7 @@
   attrsSubtype = import ./attrsSubtype.nix;
   wrapDebug = import ./wrapDebug.nix;
   extendNixvimEnvAttrs1 = import ./nixvim/extendNixvimEnvAttrs1.nix;
-  extendEnv = import ./extendEnv.nix;
+  extendEnv = import ./extendEnv.nix { inherit pkgslib; };
   mkMyPkgs = import ./mkMyPkgs.nix { inherit pkgslib; };
 }
 

@@ -12,12 +12,16 @@
         };
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
-        tclib = import ./colossus_rhodes { inherit baselib pkgslib; typesSource = ./mauso_halicarnassus; };
+        tclib = import ./colossus_rhodes { inherit baselib pkgslib; };
+        types = import ./mauso_halicarnassus { inputs = {
+          inherit pkgslib baselib;
+        }; };
         outputDecl1 = {
-          inputs = rec {
-            inherit pkgs pkgslib baselib tclib;
+          inputs = types // (rec {
+            inherit pkgs pkgslib baselib;
+            tc = tclib.tc;
             nixvimFlake = inputs.nixvimFlake;
-          };
+          });
           supportedSystems = [
             "x86_64-linux"
           ];
@@ -43,5 +47,8 @@
           mypkgsdir = ./temple_artemis_ephesus;
         };
       };
-      in total.mkOutputResult // { myPkgs = total.myPkgs; };
+      in total.mkOutputResult // { 
+        myPkgs = total.myPkgs; 
+        types = total.types;
+    };
 }

@@ -1,18 +1,17 @@
-{ inputs, activateDebug ? false, ... }:
+{ inputs, myPkgs, activateDebug ? false, ... }:
+with builtins;
 with inputs;
-with tclib;
 with types;
 baselib.extendEnv {
   inherit inputs myPkgs activateDebug;
   target = ./workEnv.nix;
-  extension = reader: with reader; tc Env {
+  extension = r: with r; tc Env {
     inherit packagesFromNixpkgs;
-    extend packagesFromLocalRepo (with myPkgs; [
-      androidSdk.emulator
-      androidSdk.platform-tools
-    ]);
     shellHook = ''
       export name=androidEnv
     '';
-  };
+  } // r.extend.packagesFromLocalRepo add (with myPkgs; [
+    androidSdk.emulator
+    androidSdk.platform-tools
+  ]);
 }

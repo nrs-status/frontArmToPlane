@@ -1,3 +1,4 @@
+{ pkgslib }:
 { inputs, myPkgs, activateDebug, target, extension }:
 with inputs;
 let total = rec {
@@ -5,6 +6,10 @@ let total = rec {
     inherit inputs myPkgs;
     activateDebug = true;
   });
+  readerFields = (with targetTotal; {
+    inherit packagesFromNixpkgs packagesFromLocalRepo shellHoook;
+  });
+  reader = import ./mkReader.nix { inherit pkgslib; } { inherit readerFields; };
   newEnvDecl = extension (with targetTotal; {
     inherit packagesFromNixpkgs packagesFromLocalRepo shellHook;
   });
