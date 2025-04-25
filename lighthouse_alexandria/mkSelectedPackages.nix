@@ -1,9 +1,9 @@
 { pkgslib }:
-{ reader, mypkgsdir, activateDebug ? false }:
+{ reader, lclpkgsdir, activateDebug ? false }:
 let total = rec {
-  mkMyPkgs = import ./mkMyPkgs.nix { inherit pkgslib; };
-  myPkgs = mkMyPkgs {
-    inherit mypkgsdir;
+  mkLclPkgs = import ./mkLclPkgs.nix { inherit pkgslib; };
+  lclPkgs = mkLclPkgs {
+    inherit lclpkgsdir;
     inputs = reader.inputs;
     system = reader.system;
   };

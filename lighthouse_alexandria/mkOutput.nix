@@ -1,13 +1,13 @@
 { pkgslib }:
-{ envsdir, mypkgsdir, outputDeclList, activateDebug ? false}:
+{ envsdir, lclpkgsdir, outputDeclList, activateDebug ? false}:
 let total = rec {
   reader = form : { inherit form; next = x : reader (form // x); };
   mkSelectedEnvs = readerToRun: import ./mkSelectedEnvs.nix { inherit pkgslib; } {
-    inherit mypkgsdir envsdir;
+    inherit lclpkgsdir envsdir;
     reader = readerToRun;
   };
   mkSelectedPackages = readerToRun: import ./mkSelectedPackages.nix { inherit pkgslib; } { 
-    inherit mypkgsdir;
+    inherit lclpkgsdir;
     reader = readerToRun;
   };
   initReaderWith = funcToApply: decl: pkgslib.attrsets.genAttrs decl.supportedSystems (system: funcToApply (reader {

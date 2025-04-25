@@ -39,15 +39,15 @@
         };
         mkOutputResult = baselib.mkOutput {
           envsdir = ./pyramid_giza;
-          mypkgsdir = ./temple_artemis_ephesus;
+          lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclList = [
             outputDecl1
           ];
         };
-        myPkgs = baselib.mkMyPkgs {
+        lclPkgs = baselib.mkMyPkgs {
           inputs = outputDecl1.inputs;
           system = "x86_64-linux";
-          mypkgsdir = ./temple_artemis_ephesus;
+          lclpkgsdir = ./temple_artemis_ephesus;
         };
       };
       in total.mkOutputResult // { 
