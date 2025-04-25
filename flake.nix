@@ -16,7 +16,7 @@
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
         tclib = import ./colossus_rhodes { inherit baselib pkgslib; };
-        types = baselib.mkTypesAttrs { inherit baselib; } { typesdir = ./mauso_halicarnassus };
+        types = baselib.mkTypesAttrs { inherit baselib; } { typesdir = ./mauso_halicarnassus; };
         outputDecl1 = {
           inputs = (types // rec {
             inherit pkgs pkgslib baselib types;

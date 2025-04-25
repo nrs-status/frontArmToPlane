@@ -2,7 +2,9 @@
 let total = rec {
   final = pkgs.mkShell {
     packages = env.packagesFromNixpkgs ++ env.packagesFromLocalRepo;
-    shelHook = env.shellHook;
+    shelHook = ''export name=${env.name}
+    ${env.shellHook}
+    '';
   };
 }; in (import ./wrapDebug.nix) {
   inherit total activateDebug;
