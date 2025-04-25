@@ -1,5 +1,5 @@
-{ inputs }:
-with inputs; baselib.attrsSubtype {
+{ baselib, ... }:
+baselib.attrsSubtype {
   fields = [];
   predicates = [
     "nonEmptyAttrs"

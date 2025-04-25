@@ -9,5 +9,6 @@
   extendNixvimEnvAttrs1 = import ./nixvim/extendNixvimEnvAttrs1.nix;
   extendEnv = import ./extendEnv.nix { inherit pkgslib; };
   mkLclPkgs = import ./mkLclPkgs.nix { inherit pkgslib; };
+  mkTypesAttrs = import ./mkTypesAttrs.nix;
 }
 
