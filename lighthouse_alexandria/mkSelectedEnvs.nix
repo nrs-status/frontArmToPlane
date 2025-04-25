@@ -9,7 +9,7 @@ let total = rec {
   };
   mkEnvsAttrs = import ./mkEnvsAttrs.nix { inherit pkgslib; };
   envsAttrs = mkEnvsAttrs {
-    inherit envsdir myPkgs;
+    inherit envsdir lclPkgs;
     inputs = reader.inputs;
   };
   selectedEnvs = pkgslib.attrsets.genAttrs reader.envsToProvide (label: envsAttrs.${label});
