@@ -10,5 +10,6 @@
   extendEnv = import ./extendEnv.nix { inherit pkgslib; };
   mkLclPkgs = import ./mkLclPkgs.nix { inherit pkgslib; };
   mkTypesAttrs = import ./mkTypesAttrs.nix;
+  shellOfEnv = import ./shellOfEnv.nix;
 }
 
