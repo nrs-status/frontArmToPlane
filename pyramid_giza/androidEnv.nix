@@ -1,16 +1,16 @@
-{ inputs, myPkgs, activateDebug ? false, ... }:
+{ inputs, lclPkgs, activateDebug ? false, ... }:
 with builtins;
 with inputs;
 let total = rec {
-  newLocalPackages = with myPkgs.androidSdk; [
+  newLocalPackages = with lclPkgs.androidSdk; [
     emulator platform-tools emulatorScript
   ];
   newShellHook = ''
     export name=androidEnv
-    export PATH=:${myPkgs.androidSdk.emulatorScript}/bin/run-test-emulator
+    export PATH=:${lclPkgs.androidSdk.emulatorScript}/bin/run-test-emulator
   '';
   final = baselib.extendEnv {
-    inherit inputs myPkgs activateDebug;
+    inherit inputs lclPkgs activateDebug;
     target = ./workEnv.nix;
     extension = r: tc Env (with r; {
       inherit packagesFromNixpkgs;

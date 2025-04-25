@@ -49,7 +49,7 @@
         };
       };
       in total.mkOutputResult // { 
-        lclPkgs = total.myPkgs; 
+        lclPkgs = total.lclPkgs; 
         types = total.types;
         baselib = total.baselib;
         tclib = total.tclib;

@@ -1,4 +1,4 @@
-args@{ inputs, myPkgs, activateDebug ? false }:
+args@{ inputs, lclPkgs, activateDebug ? false }:
 let total = rec { 
   pkgs = inputs.pkgs;
   packagesFromNixpkgs = with pkgs; [

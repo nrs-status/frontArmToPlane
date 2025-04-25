@@ -1,9 +1,9 @@
 { pkgslib }:
-args@{ inputs, myPkgs, target, extension, activateDebug ? false }:
+args@{ inputs, lclPkgs, target, extension, activateDebug ? false }:
 with inputs;
 let total = rec {
   targetTotal = import target {
-    inherit inputs myPkgs;
+    inherit inputs lclPkgs;
     activateDebug = true;
   };
   readerFields = {

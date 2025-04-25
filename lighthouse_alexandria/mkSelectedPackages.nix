@@ -9,11 +9,11 @@ let total = rec {
   };
   pkgOfPath = path: { 
     key = path;
-    val = pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") myPkgs;
+    val = pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") lclPkgs;
   };
   pkgOfLabel = label: {
     key = label;
-    val = myPkgs.${label};
+    val = lclPkgs.${label};
   };
     
   triageElm = elm: 
