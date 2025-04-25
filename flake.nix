@@ -8,7 +8,10 @@
       let total = rec {
         pkgs = import inputs.nixpkgs { 
           system = "x86_64-linux"; 
-          config.allowUnfree = true;
+          config = {
+            allowUnfree = true;
+            android_sdk.accept_license = true;
+          };
         };
         pkgslib = pkgs.lib;
         baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
@@ -50,5 +53,7 @@
       in total.mkOutputResult // { 
         myPkgs = total.myPkgs; 
         types = total.types;
+        baselib = total.baselib;
+        tclib = total.tclib;
     };
 }
