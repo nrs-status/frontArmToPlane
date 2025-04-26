@@ -53,5 +53,6 @@
         types = total.types;
         baselib = total.baselib;
         tclib = total.tclib;
+        nixpkgs = inputs.nixpkgs;
     };
 }
