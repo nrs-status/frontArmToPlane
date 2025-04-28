@@ -1,5 +1,5 @@
-{ baselib, pkgslib, activateDebug ? false }:
-{ target, type }:
+{ baselib, pkgslib }:
+{ target, type, activateDebug ? false }:
 with builtins;
 let total = rec {
   tcPred = pred: pred.handler {
