@@ -1,6 +1,5 @@
-args@{ baselib, ... }:
-{ typesdir }:
-builtins.mapAttrs (key: val: val // { typeName = key; }) (baselib.importPairAttrsOfDir {
+{ typesdir, importsToPass }:
+builtins.mapAttrs (key: val: val // { typeName = key; }) ( import ./importPairAttrsOfDir {
   filePath = typesdir;
-  inputForImportPairs = args;
+  inputForImportPairs = importsToPass;
 })

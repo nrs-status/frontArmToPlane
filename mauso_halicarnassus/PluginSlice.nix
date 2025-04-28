@@ -1,7 +1,7 @@
-{ baselib, ... }:
-baselib.attrsSubtype {
-  fields = [];
-  predicates = [
-    "nonEmptyAttrs"
+{ inputs }:
+{
+  typeName = "PluginSlice";
+  preds = [
+    inputs.tclib.predicates.nonEmptyAttrs
   ];
 }

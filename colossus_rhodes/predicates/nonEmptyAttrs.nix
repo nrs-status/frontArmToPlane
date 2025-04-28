@@ -1,7 +1,11 @@
-{}:
-{
-  name = "nonEmptyAttrs";
+{ inputs, activateDebug ? false }:
+with inputs;
+with builtins;
+let total.final = {
+  predname = "nonEmptyAttrs";
   function = attrs:
-    0 < builtins.length (builtins.attrNames attrs);
-  failureMsg = "attribute set is empty";
+    0 < length (attrNames attrs);
+  handler = { target, type }: (import ../stdTcError.nix { inherit type predname; });
+}; in wrapDebug {
+  inherit total activateDebug;
 }

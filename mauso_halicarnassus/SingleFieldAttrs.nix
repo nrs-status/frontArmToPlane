@@ -1,7 +1,7 @@
-{ baselib, ... }:
-baselib.attrsSubtype {
-  fields = [];
-  predicates = [
-    "singleFieldAttrs"
+{ inputs }:
+{
+  typeName = "SingleFieldAttrs";
+  preds = [
+    inputs.tclib.predicates.singleFieldAttrs
   ];
 }
