@@ -17,7 +17,7 @@ let total = rec {
     #
 
   ];
-  packagesFromLocalRepo = with myPkgs; [
+  packagesFromLocalRepo = with lclPkgs; [
     nixvim.base
   ];
   shellHook = ''

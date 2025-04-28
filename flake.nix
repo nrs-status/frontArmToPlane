@@ -46,7 +46,7 @@
             outputDecl1
           ];
         };
-        lclPkgs = baselib.mkMyPkgs {
+        lclPkgs = baselib.mkLclPkgs {
           inputs = outputDecl1.inputs;
           system = "x86_64-linux";
           lclpkgsdir = ./temple_artemis_ephesus;

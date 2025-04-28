@@ -3,14 +3,17 @@ rec {
     nixpkgs = builtins.getFlake "github:NixOs/nixpkgs/nixos-unstable";
     nixvimFlake = builtins.getFlake "github:nix-community/nixvim";
   };
-        pkgs = import flakeInputs.nixpkgs {};
-      pkgslib = pkgs.lib;
-      baselib = import ../lighthouse_alexandria { inherit pkgslib; nixvimFlake = flakeInputs.nixvimFlake; };
+  pkgs = import flakeInputs.nixpkgs {};
+  pkgslib = pkgs.lib;
+  baselib = import ../lighthouse_alexandria { inherit pkgslib; nixvimFlake = flakeInputs.nixvimFlake; };
 
-  types = import ../mauso_halicarnassus { 
-        inputs = { 
-          inherit pkgslib baselib;
-        }; 
+  types = baselib.mkTypesAttrs {
+    typesdir = ../mauso_halicarnassus;
+    importsToPass = {
+      inputs = {
+        inherit pkgslib baselib;
+      };
+    };
   };
   outputDecl = {
     inputs = (types // rec {
