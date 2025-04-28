@@ -3,7 +3,11 @@
   typecheck = import ./typecheck.nix { inherit baselib pkgslib; };
   predicates = baselib.importPairAttrsOfDir {
     filePath = ./predicates;
-    inputForImportPairs = {};
+    inputForImportPairs = {
+      inputs = {
+        inherit baselib pkgslib;
+      };
+    };
   };
   tc = import ./tc.nix { inherit baselib pkgslib; };
   stdTcError = import ./stdTcError.nix;
