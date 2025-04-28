@@ -9,9 +9,10 @@ let total = rec {
   forDebug = { inherit type; };
 }; in baselib.wrapSubstitutingDebug {
   inherit total activateDebug;
-  substitutionAttrs = {
+  substitutionAttrs = rec {
     tcPred = pred: trace ("typechecking pred: ${pred.predName} for ${type.typeName}") pred.handler {
       inherit target type;
     };
+    final = seq (map tcPred type.preds) target;
   };
 }
