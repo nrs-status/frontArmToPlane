@@ -12,5 +12,6 @@
   mkTypesAttrs = import ./mkTypesAttrs.nix { inherit pkgslib; };
   shellOfEnv = import ./shellOfEnv.nix;
   wrapSubstitutingDebug = import ./wrapSubstitutingDebug.nix;
+  deepMerge = import ./deepMerge.nix;
 }
 
