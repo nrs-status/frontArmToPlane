@@ -6,7 +6,7 @@ let total = rec {
     inherit target type;
   };
   final = map tcPred type.preds;
-  forDebug = { inherit type; }
+  forDebug = { inherit type; };
 }; in baselib.wrapSubstitutingDebug {
   inherit total activateDebug;
   substitutionAttrs = {
