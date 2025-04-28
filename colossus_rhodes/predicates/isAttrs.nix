@@ -2,7 +2,7 @@
 with inputs;
 let total = rec { 
   protoPred = {
-    predname = "isAttrs";
+    predName = "isAttrs";
     function = builtins.isAttrs;
   };
   final = (import ../addStdHandler.nix { inherit inputs activateDebug; }) protoPred;

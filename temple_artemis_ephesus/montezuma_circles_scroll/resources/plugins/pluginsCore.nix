@@ -1,131 +1,136 @@
-{ inputs, ... }:
+{ inputs, system, activateDebug ? false }:
 with inputs;
-tc PluginSlice {
+let total = rec {
+  final = tc PluginSlice tcInput;
+  tcInput = {
 
-  #find-next-character motion
-  hop = {
-    enable = true;
-  };
-
-  telescope = {
-    enable = true;
-    extensions.fzf-native.enable = true;
-  };
-
-  #colored brackets, parentheses, etc.
-  rainbow-delimiters.enable = true;
-
-  #automatic nix indentation, filetype detection for .nix files, syntax highlighting for nix
-  nix.enable = true;
-
-  #automatically set expandtab (enables spaces instead of tabs) and shiftwidth (amount of whitespace to add or remove when an indentation command is called) automatically
-  sleuth.enable = true;
-
-  #commands to add/remove/replace brackets, parenthesis, etc. in combination with motion commands
-  surround.enable = false;
-
-  auto-save.enable = true;
-
-  #automatically close brackets, parentheses, etc.
-  nvim-autopairs = {
-    enable = true;
-    settings = {
-      map_cr = true; #behaviour of <cr> when cursor is in the following position: {|}
+    #find-next-character motion
+    hop = {
+      enable = true;
     };
-  };
 
-  #pre-existing snippets collection
-  friendly-snippets.enable = true;
+    telescope = {
+      enable = true;
+      extensions.fzf-native.enable = true;
+    };
 
-  #snippets engine
-  luasnip = {
-    enable = true;
-    fromLua = [
-      {paths = ../snippets;}
-    ];
-    fromSnipmate = [
-      {}
-      {paths = ../snippets;}
-    ];
-  };
+    #colored brackets, parentheses, etc.
+    rainbow-delimiters.enable = true;
 
-  # git integrations
-  gitsigns.enable = true;
+    #automatic nix indentation, filetype detection for .nix files, syntax highlighting for nix
+    nix.enable = true;
 
-  #add indentation guides
-  indent-blankline = {
-    enable = true;
-    settings = {
-      exclude = {
-        buftypes = ["terminal" "nofile"];
-        filetypes = ["help"];
+    #automatically set expandtab (enables spaces instead of tabs) and shiftwidth (amount of whitespace to add or remove when an indentation command is called) automatically
+    sleuth.enable = true;
+
+    #commands to add/remove/replace brackets, parenthesis, etc. in combination with motion commands
+    surround.enable = false;
+
+    auto-save.enable = true;
+
+    #automatically close brackets, parentheses, etc.
+    nvim-autopairs = {
+      enable = true;
+      settings = {
+        map_cr = true; #behaviour of <cr> when cursor is in the following position: {|}
       };
     };
-  };
 
-  #status line
-  lualine.enable = true;
+    #pre-existing snippets collection
+    friendly-snippets.enable = true;
 
-  #magit-like git interface
-  neogit.enable = true;
-
-  #debug adapter protocol client
-  dap = {
-    enable = true;
-    extensions = {
-      dap-python.enable = true;
+    #snippets engine
+    luasnip = {
+      enable = true;
+      fromLua = [
+        {paths = ../snippets;}
+      ];
+      fromSnipmate = [
+        {}
+        {paths = ../snippets;}
+      ];
     };
-  };
 
-  treesitter = {
-    enable = true;
-    indent = true;
-  };
+    # git integrations
+    gitsigns.enable = true;
 
-  #add context at the top of the window, wherever you are
-  treesitter-context = {
-    enable = false;
-    settings = {
-      max_lines = 5;
+    #add indentation guides
+    indent-blankline = {
+      enable = true;
+      settings = {
+        exclude = {
+          buftypes = ["terminal" "nofile"];
+          filetypes = ["help"];
+        };
+      };
     };
-  };
 
-  #folding
-  nvim-ufo = {
-    enable = true;
-    openFoldHlTimeout = 0;
-    providerSelector = ''
-      function()
-        return { "lsp", "indent" }
-      end
-    '';
-  };
+    #status line
+    lualine.enable = true;
 
-  #lsp improvements and prettification
-  lspsaga.enable = true;
+    #magit-like git interface
+    neogit.enable = true;
 
-  conform-nvim = {
-    enable = true;
-    formattersByFt = {
-      clojure = ["cljstyle"];
-      haskell = ["ormolu"];
-      javascript = ["prettierd"];
-      javascriptreact = ["prettierd"];
-      typescript = ["prettierd"];
-      typescriptreact = ["prettierd"];
-      python = ["black"];
-      lua = ["stylua"];
-      markdown = ["prettierd"];
-      nix = ["alejandra"];
-      html = ["rustywind" "stylelint" "htmlbeautifier"];
-      css = ["stylelint"];
-      bash = ["beautysh"];
-      cabal = ["cabal_fmt"];
-      json = ["fixjson"];
-      yaml = ["yamlfmt"];
+    #debug adapter protocol client
+    dap = {
+      enable = true;
+      extensions = {
+        dap-python.enable = true;
+      };
     };
-  };
 
-  #adds pictograms to lsp
-  lspkind.enable = true;
+    treesitter = {
+      enable = true;
+      indent = true;
+    };
+
+    #add context at the top of the window, wherever you are
+    treesitter-context = {
+      enable = false;
+      settings = {
+        max_lines = 5;
+      };
+    };
+
+    #folding
+    nvim-ufo = {
+      enable = true;
+      openFoldHlTimeout = 0;
+      providerSelector = ''
+        function()
+          return { "lsp", "indent" }
+        end
+      '';
+    };
+
+    #lsp improvements and prettification
+    lspsaga.enable = true;
+
+    conform-nvim = {
+      enable = true;
+      formattersByFt = {
+        clojure = ["cljstyle"];
+        haskell = ["ormolu"];
+        javascript = ["prettierd"];
+        javascriptreact = ["prettierd"];
+        typescript = ["prettierd"];
+        typescriptreact = ["prettierd"];
+        python = ["black"];
+        lua = ["stylua"];
+        markdown = ["prettierd"];
+        nix = ["alejandra"];
+        html = ["rustywind" "stylelint" "htmlbeautifier"];
+        css = ["stylelint"];
+        bash = ["beautysh"];
+        cabal = ["cabal_fmt"];
+        json = ["fixjson"];
+        yaml = ["yamlfmt"];
+      };
+    };
+
+    #adds pictograms to lsp
+    lspkind.enable = true;
+  };
+}; in baselib.wrapDebug {
+  inherit total activateDebug;
 }

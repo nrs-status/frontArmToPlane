@@ -6,12 +6,12 @@ rec {
   pkgs = import flakeInputs.nixpkgs {};
   pkgslib = pkgs.lib;
   baselib = import ../lighthouse_alexandria { inherit pkgslib; nixvimFlake = flakeInputs.nixvimFlake; };
-
+  tclib = import ../colossus_rhodes { inherit pkgslib baselib; };
   types = baselib.mkTypesAttrs {
     typesdir = ../mauso_halicarnassus;
     importsToPass = {
       inputs = {
-        inherit pkgslib baselib;
+        inherit pkgslib baselib tclib;
       };
     };
   };

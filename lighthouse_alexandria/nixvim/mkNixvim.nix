@@ -1,19 +1,20 @@
 { pkgslib, nixvimFlake, activateDebug ? false }:
 { inputs, system }:
 {symlinkJoinName, etc, keymaps, opts, filetype, pluginsList, extraPlugins, extraConfigLuaList, extraPackages}:
+with builtins;
 let total = rec {
   nixvimMaker = nixvimFlake.legacyPackages.${system}.makeNixvimWithModule;
-  extraConfigLua = builtins.foldl' (acc: next: acc + builtins.readFile next) "" extraConfigLuaList;
+  extraConfigLua = foldl' (acc: next: acc + readFile next) "" extraConfigLuaList;
+  importMapping = map (path: import path { inherit inputs; inherit system; }) pluginsList;
+  plugins = foldl' (import ../deepMerge.nix) {} importMapping;
   argToNixvimMaker = {
     module = (import etc {}) // {
-      opts = import opts { inherit pkgslib; inherit inputs; };
+      opts = import opts { inherit inputs; };
       inherit filetype;
       keymaps = import keymaps {};
       inherit extraConfigLua;
       inherit extraPlugins;
-      plugins = let
-          importMapping = builtins.map (path: import path { inherit inputs; inherit system;}) pluginsList;
-      in inputs.baselib.concatAttrSets importMapping;
+      inherit plugins;
     };
   }; 
   final = inputs.pkgs.symlinkJoin {

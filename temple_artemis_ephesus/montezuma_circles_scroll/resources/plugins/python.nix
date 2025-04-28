@@ -1,13 +1,19 @@
-{ inputs, ... }:
+{ inputs, system, activateDebug ? false }:
 with inputs;
-tc PluginSlice { pylsp = {
-    enable = true;
-    package = null;
-    settings = {
-      plugins = {
-        flake8.enabled = true;
-        ruff.enabled = true;
+let total = {
+  tcInput = { 
+    pylsp = {
+      enable = true;
+      package = null;
+      settings = {
+        plugins = {
+          flake8.enabled = true;
+          ruff.enabled = true;
+        };
       };
     };
   };
-}
+  final = tc PluginSlice tcInput;
+}; in baselib.wrapDebug {
+  inherit total activateDebug;
+};

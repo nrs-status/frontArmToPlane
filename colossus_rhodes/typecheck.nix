@@ -1,11 +1,11 @@
-{ baselib, pkgslib, activateDebug ? true }:
+{ baselib, pkgslib, activateDebug ? false }:
 { target, type }:
 with builtins;
 let total = rec {
   tcPred = pred: pred.handler {
     inherit target type;
   };
-  final = map tcPred type.preds;
+  final = deepSeq (map tcPred type.preds) target;
   forDebug = { inherit type; };
 }; in baselib.wrapSubstitutingDebug {
   inherit total activateDebug;

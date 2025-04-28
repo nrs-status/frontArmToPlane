@@ -1,6 +1,8 @@
-{ inputs, ... }:
+{ inputs, system, activateDebug ? false }:
 with inputs;
-tc PluginSlice { ts-autotag = {
+let total = rec {
+  final = tc PluginSlice tcInput;
+  tcInput = { ts-autotag = {
     enable = true;
   };
 
@@ -30,4 +32,7 @@ tc PluginSlice { ts-autotag = {
     tsserver.enable = true;
     eslint.enable = true;
   };
+};
+}; in baselib.wrapDebug {
+  inherit total activateDebug;
 }

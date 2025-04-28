@@ -1,6 +1,8 @@
-{ inputs, ... }:
+{ inputs, system, activateDebug ? false }:
 with inputs;
-let total.final = {
+let total = rec { 
+  final = tc PluginSlice tcInput;
+  tcInput = {
   lsp = {
     enable = true;
     servers = {
@@ -34,4 +36,7 @@ let total.final = {
       };
     };
   };
-}; in tc SingleFieldAttrs total.final
+};
+}; in baselib.wrapDebug {
+  inherit total activateDebug;
+}

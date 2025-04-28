@@ -1,11 +1,13 @@
 { inputs, activateDebug ? false }:
 with inputs;
 with builtins;
-let total.final = {
-  predname = "nonEmptyAttrs";
-  function = attrs:
-    0 < length (attrNames attrs);
-  handler = { target, type }: (import ../stdTcError.nix { inherit type predname; });
+let total = rec { 
+  protoPred = {
+    predName = "nonEmptyAttrs";
+    function = attrs:
+      0 < length (attrNames attrs);
+  };
+  final = import ../addStdHandler.nix protoPred;
 }; in baselib.wrapDebug {
   inherit total activateDebug;
 }

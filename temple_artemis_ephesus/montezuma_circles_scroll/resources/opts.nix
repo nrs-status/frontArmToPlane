@@ -1,4 +1,5 @@
-{ inputs, ... }:
+{ inputs, activateDebug ? false }:
+with inputs;
 let total.final = {
       number = true; #show line numbers
       relativenumber = false; #show relative line numbers
@@ -27,4 +28,6 @@ let total.final = {
       foldlevelstart = 99;
       foldenable = true;
 
-}; in total.final
+    }; in baselib.wrapDebug {
+      inherit total activateDebug;
+    }

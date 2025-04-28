@@ -7,6 +7,6 @@ let
 in
 {
   base = mkNixvim (import ./envAttrs/base.nix {});
-  lean = mkNixvim (import ./envAttrs/forLean.nix { inherit inputs; });
-  webDev = mkNixvim (import ./envAttrs/forWebDev.nix { inherit inputs; });
+  #lean = mkNixvim (import ./envAttrs/forLean.nix { inherit inputs; });
+  #webDev = mkNixvim (import ./envAttrs/forWebDev.nix { inherit inputs; });
 }

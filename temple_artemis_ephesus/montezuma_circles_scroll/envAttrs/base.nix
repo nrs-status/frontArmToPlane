@@ -1,4 +1,4 @@
-{ ... }:
+{ }:
 {
   symlinkJoinName = "baseNixvimEnv";
   etc = ../resources/etc.nix;
@@ -7,7 +7,7 @@
   pluginsList = builtins.map (path : ../resources/plugins + path) [
     /cmp.nix
     /lsp.nix
-    /pluginsCore.nix
+    #/pluginsCore.nix
   ];
   filetype = {};
   extraPlugins = [];

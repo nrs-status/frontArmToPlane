@@ -1,6 +1,8 @@
-{ inputs, system, activateDebug ? false, ... }:
+{ inputs, system, activateDebug ? false }:
 with inputs;
-let total.final = {
+let total = rec {
+  final = tc PluginSlice tcInput;
+  tcInput = {
     cmp = {
     enable = true;
     autoEnableSources = true;
@@ -46,4 +48,7 @@ let total.final = {
   cmp-path.enable = true;
   cmp_luasnip.enable = true;
 };
-in tc PluginSlice total.final
+};
+in baselib.wrapDebug {
+  inherit total activateDebug;
+}
