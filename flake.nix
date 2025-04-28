@@ -18,7 +18,7 @@
         tclib = import ./colossus_rhodes { inherit baselib pkgslib; };
         types = baselib.mkTypesAttrs { typesdir = ./mauso_halicarnassus; importsToPass = {
           inputs = {
-            inherit pkgslib baselib;
+            inherit pkgslib baselib tclib;
           };
         }; };
         outputDecl1 = {
