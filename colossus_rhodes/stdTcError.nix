@@ -1,3 +1,3 @@
-{ type, predname }:
-"${type.typeName} failed to typecheck due to ${predname} predicate"
+{ type, predName }:
+"${type.typeName} failed to typecheck due to ${predName} predicate"
 
