@@ -59,5 +59,6 @@
         tclib = total.tclib;
         nixpkgs = inputs.nixpkgs;
         pkgslib = total.pkgslib;
+        pkgs = total.pkgs;
     };
 }
