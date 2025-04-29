@@ -1,9 +1,9 @@
-{ stateVersion, homeManagerFlake, attrsOfPathsStartingAtPlaceholderHome, mockHomeExtensions, activateDebug ? false, ... }:
+{ pkgs, stateVersion, homeManagerFlake, attrsOfPathsStartingAtPlaceholderHome, mockHomeExtensions, activateDebug ? false, ... }:
 #I don't understand how what's at the index given by elemAtArg is determined
 with builtins;
 let total = rec {
   homeManagerOutput = import ./mkHMOutput.nix {
-    inherit mockHomeExtensions homeManagerFlake stateVersion;
+    inherit mockHomeExtensions homeManagerFlake stateVersion pkgs;
   };
   transformPathsIntoStringsToFetchFiles = mapAttrs (key: val: ".config" + (toString val)) attrsOfPathsStartingAtPlaceholderHome;
   grabMatchingTarget = targetToMatch: acc: next: if next.target == targetToMatch then next else acc;
