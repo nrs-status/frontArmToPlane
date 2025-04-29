@@ -1,7 +1,7 @@
-{ inputs }:
+{ lclInputs }:
 {
   typeName = "SingleFieldAttrs";
   preds = [
-    inputs.tclib.predicates.singleFieldAttrs
+    lclInputs.tclib.predicates.singleFieldAttrs
   ];
 }

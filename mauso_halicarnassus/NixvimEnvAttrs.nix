@@ -1,5 +1,5 @@
-{ inputs }:
-with inputs;
+{ lclInputs }:
+with lclInputs;
 {
   typeName = "NixvimEnvAttrs";
   preds = [

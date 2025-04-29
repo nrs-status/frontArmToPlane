@@ -1,7 +1,7 @@
-{ inputs }:
+{ lclInputs }:
 {
   typeName = "PluginSlice";
   preds = [
-    inputs.tclib.predicates.nonEmptyAttrs
+    lclInputs.tclib.predicates.nonEmptyAttrs
   ];
 }

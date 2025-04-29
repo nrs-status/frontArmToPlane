@@ -1,16 +1,11 @@
 { pkgslib, reader, lclpkgsdir, envsdir, activateDebug ? false }:
 let total = rec {
-  mkLclPkgs = import ./mkLclPkgs.nix;
-  lclPkgs = mkLclPkgs {
-    inherit lclpkgsdir pkgslib;
-    lclInputs = reader.lclInputs;
-    types = reader.types;
-    system = reader.system;
-  };
-  mkEnvsAttrs = import ./mkEnvsAttrs.nix { inherit pkgslib; };
+  mkEnvsAttrs = import ./mkEnvsAttrs.nix;
   envsAttrs = mkEnvsAttrs {
-    inherit envsdir lclPkgs;
-    inputs = reader.inputs;
+    lclPkgs = reader.lclPkgs;
+    inherit envsdir pkgslib;
+    pkgs = reader.pkgs;
+    lclInputs = reader.lclInputs;
   };
   selectedEnvs = pkgslib.attrsets.genAttrs reader.envsToProvide (label: envsAttrs.${label});
   final = selectedEnvs;

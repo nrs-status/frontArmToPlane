@@ -1,19 +1,12 @@
 { pkgslib, reader, lclpkgsdir, activateDebug ? false }:
 let total = rec {
-  mkLclPkgs = import ./mkLclPkgs.nix;
-  lclPkgs = mkLclPkgs {
-    inherit lclpkgsdir pkgslib;
-    lclInputs = reader.lclInputs;
-    types = reader.types;
-    system = reader.system;
-  };
   pkgOfPath = path: { 
     key = path;
-    val = pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") lclPkgs;
+    val = pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") reader.lclPkgs;
   };
   pkgOfLabel = label: {
     key = label;
-    val = lclPkgs.${label};
+    val = reader.lclPkgs.${label};
   };
     
   triageElm = elm: 

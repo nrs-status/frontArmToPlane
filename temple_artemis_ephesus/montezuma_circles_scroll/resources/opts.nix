@@ -1,5 +1,5 @@
-{ inputs, activateDebug ? false }:
-with inputs;
+{ lclInputs, activateDebug ? false }:
+with lclInputs;
 let total.final = {
       number = true; #show line numbers
       relativenumber = false; #show relative line numbers

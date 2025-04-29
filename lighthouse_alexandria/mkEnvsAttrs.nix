@@ -1,9 +1,8 @@
-{ pkgslib }:
-{ envsdir, inputs, lclPkgs }:
+{ pkgs, pkgslib, envsdir, lclInputs, lclPkgs }:
 (import ./importPairAttrsOfDir.nix { inherit pkgslib; }) {
     filePath = envsdir;
     inputForImportPairs = {
-      inherit inputs lclPkgs;
+      inherit lclInputs lclPkgs pkgs;
     };
 }
 

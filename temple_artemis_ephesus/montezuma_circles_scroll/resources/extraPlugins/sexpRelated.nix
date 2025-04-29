@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ lclInputs, ... }:
 {
   module = {
-    extraPlugins = with inputs.pkgs.vimPlugins; [
+    extraPlugins = with lclInputs.pkgs.vimPlugins; [
       vim-sexp vim-sexp-mappings-for-regular-people
     ];
   };

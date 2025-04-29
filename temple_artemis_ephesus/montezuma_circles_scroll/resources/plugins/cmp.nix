@@ -1,5 +1,5 @@
-{ inputs, types, system, activateDebug ? false }:
-with inputs;
+{ lclInputs, types, system, activateDebug ? false }:
+with lclInputs;
 with types;
 let total = rec {
   final = tc PluginSlice tcInput;

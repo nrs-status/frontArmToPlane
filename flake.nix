@@ -18,7 +18,6 @@
             pkgslib = pkgs.lib;
             baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
             tclib = import ./colossus_rhodes { inherit pkgslib baselib; };
-            inherit baselib tclib;
             tc = tclib.tc;
             nixvimFlake = inputs.nixvimFlake;
           };
@@ -34,17 +33,12 @@
             "androidSdk"
           ];
         };
-        mkOutputResult = baselib.mkOutput {
+        mkOutputResult = (import ./lighthouse_alexandria/mkOutput.nix) {
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclList = [
             outputDecl1
           ];
-        };
-        lclPkgs = baselib.mkLclPkgs {
-          inputs = outputDecl1.inputs;
-          system = "x86_64-linux";
-          lclpkgsdir = ./temple_artemis_ephesus;
         };
       };
       in total.mkOutputResult; 

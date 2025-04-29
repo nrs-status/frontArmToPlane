@@ -8,32 +8,44 @@ let total = rec {
   };
   mkSelectedPackages = reader: import ./mkSelectedPackages.nix {
     pkgslib = reader.pkgs.lib;
-    inherit lclpkgsdir;
+    inherit lclpkgsdir reader;
   };
-  initReaderWith = funcToApply: decl: pkgslib.attrsets.genAttrs decl.supportedSystems (system: funcToApply (reader {
+  initReaderWith = funcToApply: decl: let
+    nameValuePairBootstrap = name: value: { inherit name value; };
+    genAttrsBootstrap = names: f: listToAttrs (map (n: nameValuePairBootstrap n (f n)) names);
+  in genAttrsBootstrap decl.supportedSystems (system: funcToApply (reader (rec {
     pkgs = import decl.nixpkgs {
       inherit system;
       config = decl.nixpkgsConfig;
     };
+    pkgslib = pkgs.lib;
     lclInputs = decl.lclInputs pkgs;
     types = decl.types lclInputs;
     inherit system;
     packagesToProvide = decl.packagesToProvide;
     envsToProvide = decl.envsToProvide;
-  }));
+    lclPkgs = import ./mkLclPkgs.nix {
+      inherit pkgslib pkgs types lclpkgsdir lclInputs system;
+    };
+  })));
 
   selectedPackages = map (initReaderWith mkSelectedPackages) outputDeclList;
   selectedEnvs = map (initReaderWith mkSelectedEnvs) outputDeclList;
   deepMerge = import ./deepMerge.nix;
   foldIntoPackagesVal = builtins.foldl' deepMerge {} selectedPackages;
-  fodIntoDevShellsVal = builtins.foldl' deepMerge {} selectedEnvs;
+  foldIntoDevShellsVal = builtins.foldl' deepMerge {} selectedEnvs;
 
-  mkLclPkgs = reader: import ./mkLclPkgs.nix { pkgslib = reader.pkgs.lib; };
+  mkLclPkgs = reader: import ./mkLclPkgs.nix { 
+    pkgslib = reader.pkgs.lib; 
+    types = reader.types;
+    lclInputs = reader.lclInputs;
+    inherit lclpkgsdir;
+  };
   lclPkgs = map (initReaderWith mkLclPkgs) outputDeclList;
 
   final = {
     packages = foldIntoPackagesVal;
-    devShells = foldIntoDevSellsVal;
+    devShells = foldIntoDevShellsVal;
     inherit lclPkgs;
   };
 }; in (import ./wrapDebug.nix) {

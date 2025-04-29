@@ -1,5 +1,5 @@
-{ inputs, ... }:
-inputs.baselib.extendNixvimEnvAttrs1 {
+{ lclInputs, ... }:
+lclInputs.baselib.extendNixvimEnvAttrs1 {
   envAttrsToExtend = import ./base.nix {};
   symlinkJoinName = "leanNixvimEnv";
   plugins = [
