@@ -4,7 +4,6 @@
     inputForImportPairs = {
       inherit types lclInputs lclPkgs pkgs;
     };
-    predicateForFilteringListing = filePath: pkgslib.hasSuffix ".nix" filePath;
 }
 
 

@@ -6,7 +6,6 @@ let total = rec {
    inputForImportPairs = {
      inherit lclInputs system types pkgs;
    };
-   predicateForFilteringListing = filePath: pkgslib.hasSuffix "default.nix" filePath;
  };
 final = filteredFilePaths;
 }; in lclInputs.baselib.wrapDebug {

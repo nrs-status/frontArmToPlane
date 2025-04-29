@@ -1,10 +1,10 @@
 { pkgslib }:
-{ filePathForRecursiveFileListing, inputForImportPairs, predicateForFilteringListing, activateDebug ? false }:
+{ filePathForRecursiveFileListing, inputForImportPairs, activateDebug ? false }:
 with builtins;
 let total = rec {
   filesList = (import ./listDirsSatisfyingPred.nix { inherit pkgslib; }) {
     dir = filePathForRecursiveFileListing;
-    pred = predicateForFilteringListing;
+    pred = pkgslib.hasSuffix "default.nix";
   };
   functionToMap = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
   importPairList = map functionToMap filesList;
