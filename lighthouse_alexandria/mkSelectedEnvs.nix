@@ -6,6 +6,7 @@ let total = rec {
     inherit envsdir pkgslib;
     pkgs = reader.pkgs;
     lclInputs = reader.lclInputs;
+    types = reader.types;
   };
   selectedEnvs = pkgslib.attrsets.genAttrs reader.envsToProvide (label: envsAttrs.${label});
   final = selectedEnvs;

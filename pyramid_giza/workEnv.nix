@@ -1,5 +1,7 @@
-args@{ pkgs, lclInputs, lclPkgs, activateDebug ? false }:
+args@{ pkgs, types, lclInputs, lclPkgs, activateDebug ? false }:
+with types;
 let total = rec { 
+  inherit args;
   packagesFromNixpkgs = with pkgs; [
     nix-index #allows finding what packages provide dependencies for auto-patchelf
     git
@@ -25,9 +27,6 @@ let total = rec {
   packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
   final = pkgs.mkShell {
     inherit shellHook packages;
-  };
-  debug = {
-    inherit args;
   };
 }; in lclInputs.baselib.wrapDebug {
   inherit total activateDebug;

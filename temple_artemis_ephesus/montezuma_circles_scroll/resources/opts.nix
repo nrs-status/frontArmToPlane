@@ -1,4 +1,4 @@
-{ lclInputs, activateDebug ? false }:
+{ lclInputs, activateDebug ? false, ... }:
 with lclInputs;
 let total.final = {
       number = true; #show line numbers

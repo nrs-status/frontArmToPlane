@@ -1,4 +1,4 @@
-{ lclInputs, types, system, activateDebug ? false }:
+{ lclInputs, types, system, activateDebug ? false, ...}:
 with lclInputs;
 with types;
 let total = rec {

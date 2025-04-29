@@ -27,19 +27,17 @@
         };
         envsToProvide = [
           "workEnv"
-          "androidEnv"
         ];
         packagesToProvide = [
           [ "nixvim" "base" ]
-          "androidSdk"
         ];
-        outputDeclUnstable = {
+        wUnstable = {
           nixpkgs = inputs.nixpkgsUnstable;
           inherit nixpkgsConfig supportedSystems envsToProvide packagesToProvide;
           lclInputs = nixpkgslessLclInputs;
           types = lclInputslessTypes;
         };
-        outputDecl2411 = {
+        w2411 = {
           nixpkgs = inputs.nixpkgs2411;
           inherit nixpkgsConfig supportedSystems envsToProvide packagesToProvide;
           lclInputs = nixpkgslessLclInputs;
@@ -48,10 +46,10 @@
         mkOutputResult = (import ./lighthouse_alexandria/mkOutput.nix) {
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
-          outputDeclList = [
-            outputDeclUnstable
-            outputDecl2411
-          ];
+          outputDeclAttrs = {
+            inherit wUnstable w2411;
+          };
+          activateDebug = true;
         };
       };
       in total.mkOutputResult; 

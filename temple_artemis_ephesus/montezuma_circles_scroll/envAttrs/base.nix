@@ -1,4 +1,4 @@
-{ }:
+{ ... }:
 {
   symlinkJoinName = "baseNixvimEnv";
   etc = ../resources/etc.nix;

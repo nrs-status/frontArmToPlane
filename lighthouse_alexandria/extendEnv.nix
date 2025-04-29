@@ -1,9 +1,9 @@
 { pkgslib }:
-args@{ inputs, lclPkgs, target, extension, activateDebug ? false }:
-with inputs;
+args@{ types, lclInputs, lclPkgs, target, pkgs, extension, activateDebug ? false }:
+with lclInputs;
 let total = rec {
   targetTotal = import target {
-    inherit inputs lclPkgs;
+    inherit pkgs lclInputs lclPkgs;
     activateDebug = true;
   };
   readerFields = {
@@ -13,11 +13,10 @@ let total = rec {
   };
   reader = import ./mkReader.nix { inherit pkgslib; } { inherit readerFields; };
   newEnvDecl = extension reader;
-  pkgs = targetTotal.pkgs;
   packagesFromNixpkgs = newEnvDecl.packagesFromNixpkgs;
   packagesFromLocalRepo = newEnvDecl.packagesFromLocalRepo;
   shellHook = newEnvDecl.shellHook;
-  final = targetTotal.pkgs.mkShell {
+  final = pkgs.mkShell {
     packages = packagesFromNixpkgs ++ packagesFromLocalRepo;
     inherit shellHook;
   };

@@ -1,6 +1,7 @@
-{ lclInputs, types, system, activateDebug ? false }:
+{ lclInputs, types, activateDebug ? false, ... }:
+with types;
 with lclInputs;
-let total = {
+let total = rec {
   tcInput = { 
     pylsp = {
       enable = true;
@@ -16,4 +17,4 @@ let total = {
   final = tc PluginSlice tcInput;
 }; in baselib.wrapDebug {
   inherit total activateDebug;
-};
+}
