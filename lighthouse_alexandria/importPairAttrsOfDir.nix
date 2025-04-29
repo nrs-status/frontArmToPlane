@@ -1,15 +1,22 @@
 { pkgslib }:
-{ filePath, inputForImportPairs, activateDebug ? false }:
+{ filePathForRecursiveFileListing, inputForImportPairs, predicateForFilteringListing, activateDebug ? false }:
+with builtins;
 let total = rec {
-  filesList = (import ./listDirIgnoring.nix { inherit pkgslib; }) {
-    ignore = [];
-    dir = filePath;
+  filesList = (import ./listDirsSatisfyingPred.nix { inherit pkgslib; }) {
+    dir = filePathForRecursiveFileListing;
+    pred = predicateForFilteringListing;
   };
   functionToMap = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
-  importPairList = builtins.map functionToMap filesList;
-  final = builtins.listToAttrs importPairList;
+  importPairList = map functionToMap filesList;
+  testWf = attrs: if length (attrNames attrs) == 1 then attrs else throw ("importPairAttrsOfDir.nix: when skipping attribute 'default', found a value with more than one key");
+  skipDefaultAttr = keyvalpair:
+    if keyvalpair.name == "default" then { 
+      name = elemAt (attrNames (testWf keyvalpair.value)) 0;
+      value = elemAt (attrValues keyvalpair.value) 0;
+    } else keyvalpair;
+  importsWithSkippedDefaultAttr = map skipDefaultAttr importPairList;
+  final = listToAttrs importsWithSkippedDefaultAttr;
 
-}; in (import ./withDebug.nix) activateDebug {
-  debug = total;
-  nondebug = total.final;
+}; in (import ./wrapDebug.nix) {
+  inherit total activateDebug;
 }

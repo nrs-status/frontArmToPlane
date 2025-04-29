@@ -8,7 +8,7 @@
   wrapDebug = import ./wrapDebug.nix;
   extendNixvimEnvAttrs1 = import ./nixvim/extendNixvimEnvAttrs1.nix;
   extendEnv = import ./extendEnv.nix { inherit pkgslib; };
-  mkLclPkgs = import ./mkLclPkgs.nix { inherit pkgslib; };
+  mkLclPkgs = import ./mkLclPkgs.nix;
   mkTypesAttrs = import ./mkTypesAttrs.nix { inherit pkgslib; };
   shellOfEnv = import ./shellOfEnv.nix;
   wrapSubstitutingDebug = import ./wrapSubstitutingDebug.nix;

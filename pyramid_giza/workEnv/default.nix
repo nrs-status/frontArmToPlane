@@ -25,7 +25,7 @@ let total = rec {
     export name=workEnv
   '';
   packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
-  final = pkgs.mkShell {
+  final.workEnv = pkgs.mkShell {
     inherit shellHook packages;
   };
 }; in lclInputs.baselib.wrapDebug {
