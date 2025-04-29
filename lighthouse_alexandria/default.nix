@@ -13,5 +13,7 @@
   shellOfEnv = import ./shellOfEnv.nix;
   wrapSubstitutingDebug = import ./wrapSubstitutingDebug.nix;
   deepMerge = import ./deepMerge.nix;
+  mkMockHMOutputAndExtractFiles = import ./mkMockHMOutputAndExtractFiles.nix;
+  mkHMOutput = import ./mkHMOutput.nix;
 }
 
