@@ -1,33 +1,41 @@
-{ pkgslib }:
-{ envsdir, lclpkgsdir, outputDeclList, activateDebug ? false}:
+{ envsdir, lclpkgsdir, outputDeclList, activateDebug ? false }:
+with builtins;
 let total = rec {
-  reader = form : { inherit form; next = x : reader (form // x); };
-  mkSelectedEnvs = readerToRun: import ./mkSelectedEnvs.nix { inherit pkgslib; } {
-    inherit lclpkgsdir envsdir;
-    reader = readerToRun;
+  reader = form: form;
+  mkSelectedEnvs = reader: import ./mkSelectedEnvs.nix {
+    pkgslib = reader.pkgs.lib;
+    inherit lclpkgsdir envsdir reader;
   };
-  mkSelectedPackages = readerToRun: import ./mkSelectedPackages.nix { inherit pkgslib; } { 
+  mkSelectedPackages = reader: import ./mkSelectedPackages.nix {
+    pkgslib = reader.pkgs.lib;
     inherit lclpkgsdir;
-    reader = readerToRun;
   };
   initReaderWith = funcToApply: decl: pkgslib.attrsets.genAttrs decl.supportedSystems (system: funcToApply (reader {
-    inputs = decl.inputs;
+    pkgs = import decl.nixpkgs {
+      inherit system;
+      config = decl.nixpkgsConfig;
+    };
+    lclInputs = decl.lclInputs pkgs;
+    types = decl.types lclInputs;
     inherit system;
     packagesToProvide = decl.packagesToProvide;
     envsToProvide = decl.envsToProvide;
-  }).form);
-  unrealizedSelectedPackages = initReaderWith mkSelectedPackages;
-  unrealizedSelectedEnvs = initReaderWith mkSelectedEnvs;
-  selectedPackages = map unrealizedSelectedPackages outputDeclList;
-  selectedEnvs = map unrealizedSelectedEnvs outputDeclList;
+  }));
+
+  selectedPackages = map (initReaderWith mkSelectedPackages) outputDeclList;
+  selectedEnvs = map (initReaderWith mkSelectedEnvs) outputDeclList;
   deepMerge = import ./deepMerge.nix;
   foldIntoPackagesVal = builtins.foldl' deepMerge {} selectedPackages;
-  foldIntoDevShellsVal = builtins.foldl' deepMerge {} selectedEnvs;
-  final = { 
+  fodIntoDevShellsVal = builtins.foldl' deepMerge {} selectedEnvs;
+
+  mkLclPkgs = reader: import ./mkLclPkgs.nix { pkgslib = reader.pkgs.lib; };
+  lclPkgs = map (initReaderWith mkLclPkgs) outputDeclList;
+
+  final = {
     packages = foldIntoPackagesVal;
-    devShells = foldIntoDevShellsVal;
+    devShells = foldIntoDevSellsVal;
+    inherit lclPkgs;
   };
-};
-in (import ./wrapDebug.nix) {
+}; in (import ./wrapDebug.nix) {
   inherit total activateDebug;
 }

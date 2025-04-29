@@ -1,4 +1,4 @@
-{ inputs, system, activateDebug ? false }:
+{ inputs, types, system, activateDebug ? false }:
 with inputs;
 let total = {
   tcInput = { 

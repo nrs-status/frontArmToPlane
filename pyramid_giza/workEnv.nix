@@ -23,9 +23,9 @@ let total = rec {
   shellHook = ''
     export name=workEnv
   '';
+  packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
   final = total.pkgs.mkShell {
-    packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
-    inherit shellHook;
+    inherit shellHook packages;
   };
   debug = {
     inherit args;

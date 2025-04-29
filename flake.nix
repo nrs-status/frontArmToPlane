@@ -2,31 +2,26 @@
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixvimFlake.url = "github:nix-community/nixvim";
+    nixpkgs2411.url = "github:NixOs/nixpkgs/nixos-24.11";
   };
 
   outputs = inputs: 
       let total = rec {
-        pkgs = import inputs.nixpkgs { 
-          system = "x86_64-linux"; 
-          config = {
+        outputDecl1 = {
+          nixpkgs = inputs.nixpkgs;
+          nixpkgsConfig = {
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
-        };
-        pkgslib = pkgs.lib;
-        baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
-        tclib = import ./colossus_rhodes { inherit baselib pkgslib; };
-        types = baselib.mkTypesAttrs { typesdir = ./mauso_halicarnassus; importsToPass = {
-          inputs = {
-            inherit pkgslib baselib tclib;
-          };
-        }; };
-        outputDecl1 = {
-          inputs = (types // rec {
-            inherit pkgs pkgslib baselib tclib;
+          types = lclInputs: lclInputs.baselib.mkTypesAttrs { typesdir = ./mauso_halicarnassus; importsToPass = { inherit lclInputs; }; };
+          lclInputs = pkgs: rec {
+            pkgslib = pkgs.lib;
+            baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
+            tclib = import ./colossus_rhodes { inherit pkgslib baselib; };
+            inherit baselib tclib;
             tc = tclib.tc;
             nixvimFlake = inputs.nixvimFlake;
-          });
+          };
           supportedSystems = [
             "x86_64-linux"
           ];
@@ -52,13 +47,5 @@
           lclpkgsdir = ./temple_artemis_ephesus;
         };
       };
-      in total.mkOutputResult // { 
-        lclPkgs = total.lclPkgs; 
-        types = total.types;
-        baselib = total.baselib;
-        tclib = total.tclib;
-        nixpkgs = inputs.nixpkgs;
-        pkgslib = total.pkgslib;
-        pkgs = total.pkgs;
-    };
+      in total.mkOutputResult; 
 }
