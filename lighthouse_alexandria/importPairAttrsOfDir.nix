@@ -8,7 +8,7 @@ let total = rec {
   };
   functionToMap = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
   importPairList = map functionToMap filesList;
-  testWf = attrs: if length (attrNames attrs) == 1 then attrs else throw ("importPairAttrsOfDir.nix: when skipping attribute 'default', found a value with more than one key");
+  testWf = attrs: if length (attrNames attrs) == 1 then attrs else throw ("importPairAttrsOfDir.nix: when skipping attribute 'default', found a value with more than one key" + (toString (attrNames attrs)));
   skipDefaultAttr = keyvalpair:
     if keyvalpair.name == "default" then { 
       name = elemAt (attrNames (testWf keyvalpair.value)) 0;
