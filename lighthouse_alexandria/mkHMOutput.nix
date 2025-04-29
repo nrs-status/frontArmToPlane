@@ -1,4 +1,4 @@
-{ mockHomeExtension, homeManagerFlake, activateDebug ? false }:
+{ pkgs, mockHomeExtension, homeManagerFlake, activateDebug ? false }:
 with builtins; 
 let total = rec {
   mockHomeConfig = {
