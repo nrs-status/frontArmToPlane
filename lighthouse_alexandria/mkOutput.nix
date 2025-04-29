@@ -12,7 +12,7 @@ let total = rec {
   mkSelectedPackages = reader: import ./mkSelectedPackages.nix {
     inherit lclpkgsdir reader;
   };
-  initReaderWith = funcToApply: _declKey: declVal: genAttrsBootstrap declVal.supportedSystems (system: { ${declKey} = funcToApply (reader (rec {
+  initReaderWith = funcToApply: declKey: declVal: genAttrsBootstrap declVal.supportedSystems (system: { ${declKey} = funcToApply (reader (rec {
     nixpkgs = declVal.nixpkgs;
     pkgs = import declVal.nixpkgs {
       inherit system;
