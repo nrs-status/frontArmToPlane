@@ -49,7 +49,6 @@
           outputDeclAttrs = {
             inherit wUnstable w2411;
           };
-          activateDebug = true;
         };
       };
       in total.mkOutputResult; 

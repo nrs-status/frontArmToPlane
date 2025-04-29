@@ -1,8 +1,8 @@
-{ pkgslib, reader, lclpkgsdir, activateDebug ? false }:
+{ reader, lclpkgsdir, activateDebug ? false }:
 let total = rec {
   pkgOfPath = path: { 
     key = path;
-    val = pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") reader.lclPkgs;
+    val = reader.pkgslib.attrsets.attrByPath path (throw "mkOutput.nix failed to find path") reader.lclPkgs;
   };
   pkgOfLabel = label: {
     key = label;
@@ -18,7 +18,7 @@ let total = rec {
   selectedPackagesAsKeyValPairs = builtins.map triageElm reader.packagesToProvide;
   keyValPairsAsSingleKeyAttrs = attrs:
     if builtins.isList attrs.key then
-      pkgslib.attrsets.setAttrByPath attrs.key attrs.val
+      reader.pkgslib.attrsets.setAttrByPath attrs.key attrs.val
     else if builtins.isString attrs.key then
       { ${attrs.key} = attrs.val; }
     else throw "mkSelectedPkgs.nix wrong type for package label";

@@ -6,47 +6,45 @@ let total = rec {
   genAttrsBootstrap = names: f: listToAttrs (map (n: nameValuePairBootstrap n (f n)) names);
   reader = form: form;
 
-  outputDeclList = attrValues outputDeclAttrs;
-
   mkSelectedEnvs = reader: import ./mkSelectedEnvs.nix {
-    pkgslib = reader.pkgs.lib;
     inherit lclpkgsdir envsdir reader;
   };
   mkSelectedPackages = reader: import ./mkSelectedPackages.nix {
-    pkgslib = reader.pkgs.lib;
     inherit lclpkgsdir reader;
   };
-  initReaderWith = funcToApply: decl: genAttrsBootstrap decl.supportedSystems (system: funcToApply (reader (rec {
-    pkgs = import decl.nixpkgs {
+  initReaderWith = funcToApply: declKey: declVal: genAttrsBootstrap declVal.supportedSystems (system: { ${declKey} = funcToApply (reader (rec {
+    inherit declKey;
+    pkgs = import declVal.nixpkgs {
       inherit system;
-      config = decl.nixpkgsConfig;
+      config = declVal.nixpkgsConfig;
     };
     pkgslib = pkgs.lib;
-    lclInputs = decl.lclInputs pkgs;
-    types = decl.types lclInputs;
+    lclInputs = declVal.lclInputs pkgs;
+    types = declVal.types lclInputs;
     inherit system;
-    packagesToProvide = decl.packagesToProvide;
-    envsToProvide = decl.envsToProvide;
+    packagesToProvide = declVal.packagesToProvide;
+    envsToProvide = declVal.envsToProvide;
     lclPkgs = import ./mkLclPkgs.nix {
       inherit pkgslib pkgs types lclpkgsdir lclInputs system;
     };
-  })));
+  })); });
 
-  selectedPackages = map (initReaderWith mkSelectedPackages) outputDeclList;
-  selectedEnvs = map (initReaderWith mkSelectedEnvs) outputDeclList;
+  selectedPackages = mapAttrs (initReaderWith mkSelectedPackages) outputDeclAttrs;
+  selectedEnvs = mapAttrs (initReaderWith mkSelectedEnvs) outputDeclAttrs;
   deepMerge = import ./deepMerge.nix;
-  foldIntoPackagesVal = builtins.foldl' deepMerge {} selectedPackages;
-  foldIntoDevShellsVal = builtins.foldl' deepMerge {} selectedEnvs;
+  foldIntoPackagesVal = builtins.foldl' deepMerge {} (attrValues selectedPackages);
+  foldIntoDevShellsVal = builtins.foldl' deepMerge {} (attrValues selectedEnvs);
 
   mkByproduct = reader: with reader; {
     inherit pkgs lclPkgs lclInputs types;
   };
-  byproducts = mapAttrs (key: initReaderWith mkByproduct) outputDeclAttrs;
+  byproducts = mapAttrs (initReaderWith mkByproduct) outputDeclAttrs;
+  clipFirstAttr = builtins.foldl' deepMerge {} (attrValues byproducts);
 
   final = {
     packages = foldIntoPackagesVal;
     devShells = foldIntoDevShellsVal;
-    inherit byproducts;
+    byproducts = clipFirstAttr;
   };
 }; in (import ./wrapDebug.nix) {
   inherit total activateDebug;
