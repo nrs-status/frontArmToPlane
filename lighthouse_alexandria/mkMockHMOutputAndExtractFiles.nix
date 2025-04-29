@@ -3,7 +3,7 @@
 with builtins;
 let total = rec {
   homeManagerOutput = import ./mkHMOutput.nix {
-    inherit mockHomeExtension homeManagerFlake;
+    inherit mockHomeExtensions homeManagerFlake;
   };
   transformPathsIntoStringsToFetchFiles = mapAttrs (key: val: ".config" + (toString val)) attrsOfPathsStartingAtPlaceholderHome;
   grabMatchingTarget = targetToMatch: acc: next: if next.target == targetToMatch then next else acc;
