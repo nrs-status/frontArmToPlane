@@ -19,13 +19,13 @@ let total = rec {
 
   ];
   packagesFromLocalRepo = with lclPkgs; [
-    nixvim.base
+    montezuma_circles_scroll.nixvim.base
   ];
   shellHook = ''
     export name=workEnv
   '';
   packages = total.packagesFromNixpkgs ++ total.packagesFromLocalRepo;
-  final.workEnv = pkgs.mkShell {
+  final = pkgs.mkShell {
     inherit shellHook packages;
   };
 }; in lclInputs.prelib.wrapDebug {

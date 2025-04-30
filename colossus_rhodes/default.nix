@@ -4,7 +4,7 @@
   predicates = prelib.importPairAttrsOfDir {
     filePathForRecursiveFileListing = ./predicates;
     inputForImportPairs = {
-      inputs = {
+      lclInputs = {
         inherit prelib pkgslib;
       };
     };

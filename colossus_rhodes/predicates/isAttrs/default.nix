@@ -5,7 +5,7 @@ let total = rec {
     predName = "isAttrs";
     function = builtins.isAttrs;
   };
-  final = (import ../addStdHandler.nix { inherit inputs activateDebug; }) protoPred;
+  final = import ../../addStdHandler.nix protoPred;
 }; in prelib.wrapDebug {
   inherit total activateDebug;
 }

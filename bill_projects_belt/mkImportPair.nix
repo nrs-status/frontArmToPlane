@@ -1,6 +1,6 @@
 { pkgslib }: 
 { importInputs, filePath }:
 {
-  name = (import ./getSuffixlessBasename.nix { inherit pkgslib; }) filePath;
+  name = baseNameOf (dirOf filePath);
   value = import filePath importInputs;
 }

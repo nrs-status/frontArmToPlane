@@ -1,5 +1,5 @@
-{ inputs, activateDebug ? false }:
-with inputs;
+{ lclInputs, activateDebug ? false }:
+with lclInputs;
 with builtins;
 let total = rec { 
   protoPred = {
@@ -7,7 +7,7 @@ let total = rec {
     function = attrs:
       0 < length (attrNames attrs);
   };
-  final = import ../addStdHandler.nix protoPred;
-}; in baselib.wrapDebug {
+  final = import ../../addStdHandler.nix protoPred;
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

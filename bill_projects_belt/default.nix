@@ -6,4 +6,5 @@
   withDebug = import ./withDebug.nix;
   wrapDebug = import ./wrapDebug.nix;
   wrapSubstitutingDebug = import ./wrapSubstitutingDebug.nix;
+  wrapOutputtingDebug = import ./wrapOutputtingDebug.nix { inherit pkgslib; };
 }

@@ -6,8 +6,8 @@ let total = rec {
     dir = filePathForRecursiveFileListing;
     pred = pkgslib.hasSuffix "default.nix";
   };
-  functionToMap = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
-  importPairList = map functionToMap filesList;
+  mkImportPair = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
+  importPairList = map mkImportPair filesList;
   testWf = attrs: if length (attrNames attrs) == 1 then attrs else throw ("importPairAttrsOfDir.nix: when skipping attribute 'default', found a value with more than one key:" + (toString (attrNames attrs)));
   skipDefaultAttr = keyvalpair:
     if keyvalpair.name == "default" then { 

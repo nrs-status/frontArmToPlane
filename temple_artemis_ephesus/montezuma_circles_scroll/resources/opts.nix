@@ -28,6 +28,6 @@ let total.final = {
       foldlevelstart = 99;
       foldenable = true;
 
-    }; in baselib.wrapDebug {
+    }; in prelib.wrapDebug {
       inherit total activateDebug;
     }

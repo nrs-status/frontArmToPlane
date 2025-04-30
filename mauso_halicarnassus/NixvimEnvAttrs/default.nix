@@ -1,6 +1,6 @@
 { lclInputs }:
 with lclInputs;
-{ NixvimEnvAttrs = {
+{
   typeName = "NixvimEnvAttrs";
   preds = [
     (tclib.mkHasFieldsPredicate { fields = [
@@ -8,5 +8,4 @@ with lclInputs;
     ]; })
     tclib.predicates.nonEmptyAttrs
   ];
-};
 }
