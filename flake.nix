@@ -3,6 +3,7 @@
     nixpkgsUnstable.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixvimFlake.url = "github:nix-community/nixvim";
     nixpkgs2411.url = "github:NixOs/nixpkgs/nixos-24.11";
+    prelibBootstrapNixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
   outputs = inputs: 
@@ -44,7 +45,9 @@
           lclInputs = nixpkgslessLclInputs;
           types = lclInputslessTypes;
         };
+        bootstrappedPrelib = import ./bill_projects_belt { pkgslib = (import inputs.prelibBootstrapNixpkgs { system = "x86_64-linux"; }).lib; };
         mkOutputResult = (import ./lighthouse_alexandria/mkOutput.nix) {
+          prelib = bootstrappedPrelib;
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclAttrs = {

@@ -28,6 +28,6 @@ let total = rec {
   final.workEnv = pkgs.mkShell {
     inherit shellHook packages;
   };
-}; in lclInputs.baselib.wrapDebug {
+}; in lclInputs.prelib.wrapDebug {
   inherit total activateDebug;
 }

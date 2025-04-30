@@ -11,6 +11,6 @@ let total = rec {
     };
   };
   final = output;
-}; in lclInputs.baselib.wrapDebug {
+}; in lclInputs.prelib.wrapDebug {
   inherit total activateDebug;
 }

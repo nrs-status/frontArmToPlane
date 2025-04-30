@@ -38,6 +38,6 @@ let total = rec {
     };
   };
 };
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

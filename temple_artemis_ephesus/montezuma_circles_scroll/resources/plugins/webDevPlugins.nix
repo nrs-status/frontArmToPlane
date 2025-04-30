@@ -34,6 +34,6 @@ let total = rec {
     eslint.enable = true;
   };
 };
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

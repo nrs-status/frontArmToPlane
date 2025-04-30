@@ -1,13 +1,12 @@
-{ pkgslib, prelib, nixvimFlake }:
+{ tclib, pkgslib, prelib, nixvimFlake }:
 {
-  mkOutput = import ./mkOutput.nix { inherit pkgslib; };
-  preMkNixvim = import ./nixvim/mkNixvim.nix { inherit pkgslib; inherit nixvimFlake; }; #still needs pkgs and system, which are passed directly at montezuma_circles_scroll;
+  preMkNixvim = import ./nixvim/mkNixvim.nix { inherit pkgslib prelib nixvimFlake; }; #still needs pkgs and system, which are passed directly at montezuma_circles_scroll;
   concatAttrSets = import ./concatAttrSets.nix;
   attrsSubtype = import ./attrsSubtype.nix;
   extendNixvimEnvAttrs1 = import ./nixvim/extendNixvimEnvAttrs1.nix;
-  extendEnv = import ./extendEnv.nix { inherit pkgslib; };
+  extendEnv = import ./extendEnv.nix { inherit prelib pkgslib; };
   mkLclPkgs = import ./mkLclPkgs.nix;
-  mkTypesAttrs = import ./mkTypesAttrs.nix { inherit pkgslib; };
+  mkTypesAttrs = import ./mkTypesAttrs.nix { inherit prelib pkgslib; };
   shellOfEnv = import ./shellOfEnv.nix;
   deepMerge = import ./deepMerge.nix;
   mkMockHMOutputAndExtractFiles = import ./mkMockHMOutputAndExtractFiles.nix;

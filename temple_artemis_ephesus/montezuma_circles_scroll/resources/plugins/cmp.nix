@@ -50,6 +50,6 @@ let total = rec {
   cmp_luasnip.enable = true;
 };
 };
-in baselib.wrapDebug {
+in prelib.wrapDebug {
   inherit total activateDebug;
 }

@@ -132,6 +132,6 @@ let total = rec {
     #adds pictograms to lsp
     lspkind.enable = true;
   };
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

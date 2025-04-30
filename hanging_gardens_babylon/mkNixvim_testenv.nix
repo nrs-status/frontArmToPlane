@@ -5,19 +5,21 @@ rec {
   };
   pkgs = import flakeInputs.nixpkgs {};
   pkgslib = pkgs.lib;
-  baselib = import ../lighthouse_alexandria { inherit pkgslib; nixvimFlake = flakeInputs.nixvimFlake; };
-  tclib = import ../colossus_rhodes { inherit pkgslib baselib; };
+  prelib = import ../bill_projects_belt { inherit pkgslib; };
+  tclib = import ../colossus_rhodes { inherit pkgslib prelib; };
+  baselib = import ../lighthouse_alexandria { inherit pkgslib prelib tclib; nixvimFlake = flakeInputs.nixvimFlake; };
   types = baselib.mkTypesAttrs {
     typesdir = ../mauso_halicarnassus;
     importsToPass = {
-      inputs = {
-        inherit pkgslib baselib tclib;
+      lclInputs = {
+        inherit pkgslib baselib tclib prelib;
       };
     };
   };
   outputDecl = {
-    inputs = (types // rec {
+    lclInputs = (types // rec {
       inherit baselib pkgslib pkgs;
+      inherit types;
       tclib = import ../colossus_rhodes { inherit baselib pkgslib; };
       tc = tclib.tc;
 
@@ -28,22 +30,23 @@ rec {
     ];
     envsToProvide = [
       "workEnv"
-      "androidEnv"
     ];
     packagesToProvide = [
       [ "nixvim" "base" ]
-      "androidSdk"
     ];
   };
   system = "x86_64-linux";
   base = import ../temple_artemis_ephesus/montezuma_circles_scroll/envAttrs/base.nix {};
+  lclInputs = {
+    inherit tclib baselib prelib;
+    tc = tclib.tc;
+  };
   mkNixvim = import ../lighthouse_alexandria/nixvim/mkNixvim.nix {
-    inherit pkgslib;
+    inherit pkgslib prelib;
     nixvimFlake = flakeInputs.nixvimFlake;
     activateDebug = true;
   } {
-    inherit system;
-    inputs = outputDecl.inputs;
+    inherit system pkgs types lclInputs;
   };
   result = mkNixvim base;
 

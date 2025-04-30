@@ -2,7 +2,7 @@
 {
   typecheck = import ./typecheck.nix { inherit prelib pkgslib; };
   predicates = prelib.importPairAttrsOfDir {
-    filePath = ./predicates;
+    filePathForRecursiveFileListing = ./predicates;
     inputForImportPairs = {
       inputs = {
         inherit prelib pkgslib;

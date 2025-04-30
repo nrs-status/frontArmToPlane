@@ -15,6 +15,6 @@ let total = rec {
     };
   };
   final = tc PluginSlice tcInput;
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

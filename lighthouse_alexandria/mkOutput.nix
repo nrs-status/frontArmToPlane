@@ -8,7 +8,7 @@ let total = rec {
 
   mkSelectedEnvs = reader: reader.pkgslib.attrsets.genAttrs reader.envsToProvide (label: reader.envsAttrs.${label});
   mkSelectedPackages = reader: import ./mkSelectedPackages.nix {
-    inherit lclpkgsdir reader;
+    inherit lclpkgsdir reader prelib;
   };
   initReaderWith = funcToApply: declKey: declVal: genAttrsBootstrap declVal.supportedSystems (system: { ${declKey} = funcToApply (reader (rec {
     nixpkgs = declVal.nixpkgs;
@@ -23,10 +23,10 @@ let total = rec {
     packagesToProvide = declVal.packagesToProvide;
     envsToProvide = declVal.envsToProvide;
     lclPkgs = import ./mkLclPkgs.nix {
-      inherit pkgslib pkgs types lclpkgsdir lclInputs system;
+      inherit pkgslib pkgs prelib types lclpkgsdir lclInputs system;
     };
     envsAttrs = import ./mkEnvsAttrs.nix {
-      inherit lclPkgs envsdir pkgslib pkgs lclInputs types;
+      inherit lclPkgs prelib envsdir pkgslib pkgs lclInputs types;
     };
   })); });
 

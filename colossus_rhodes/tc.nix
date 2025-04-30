@@ -1,10 +1,10 @@
-{ baselib, pkgslib, activateDebug ? false }:
+{ prelib, pkgslib, activateDebug ? false }:
 type: target:
 let total = rec {
-  typecheck = import ./typecheck.nix { inherit baselib pkgslib; };
+  typecheck = import ./typecheck.nix { inherit prelib pkgslib; };
   final = typecheck {
     inherit type target;
   };
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

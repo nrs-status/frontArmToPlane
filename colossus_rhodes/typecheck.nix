@@ -1,4 +1,4 @@
-{ baselib, pkgslib }:
+{ prelib, pkgslib }:
 { target, type, activateDebug ? false }:
 with builtins;
 let total = rec {
@@ -9,7 +9,7 @@ let total = rec {
   evalPreds = seq (foldl' (acc: next: seq next {}) {} predMap) target;
   final = evalPreds;
   forDebug = { inherit type; };
-}; in baselib.wrapSubstitutingDebug {
+}; in prelib.wrapSubstitutingDebug {
   inherit total activateDebug;
   substitutionAttrs = rec {
     tcPred = pred: trace pred pred.handler {
