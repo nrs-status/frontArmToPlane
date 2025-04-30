@@ -15,6 +15,5 @@ let total = rec {
     tcPred = pred: trace pred pred.handler {
       inherit target type;
     };
-    #final = deepSeq (map tcPred type.preds) target;
   };
 }
