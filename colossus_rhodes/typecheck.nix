@@ -6,7 +6,7 @@ let total = rec {
     inherit target type;
   };
   predMap = map tcPred type.preds;
-  evalPreds = seq (seq predMap predMap) target;
+  evalPreds = seq predMap (seq predMap target);
   final = evalPreds;
   forDebug = { inherit type; };
 }; in baselib.wrapSubstitutingDebug {
