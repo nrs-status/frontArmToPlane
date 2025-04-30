@@ -1,4 +1,4 @@
-{ pkgslib }:
+{ prelib, pkgslib }:
 args@{ types, lclInputs, lclPkgs, target, pkgs, extension, activateDebug ? false }:
 with lclInputs;
 let total = rec {
@@ -23,6 +23,6 @@ let total = rec {
   debug = {
     inherit args;
   };
-}; in baselib.wrapDebug {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

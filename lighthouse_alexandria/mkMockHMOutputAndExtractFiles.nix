@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, homeManagerFlake, attrsOfPathsStartingAtPlaceholderHome, mockHomeExtensions, activateDebug ? false, ... }:
+{ prelib, pkgs, stateVersion, homeManagerFlake, attrsOfPathsStartingAtPlaceholderHome, mockHomeExtensions, activateDebug ? false, ... }:
 #I don't understand how what's at the index given by elemAtArg is determined
 with builtins;
 let total = rec {
@@ -13,6 +13,6 @@ let total = rec {
   withFetched = mapAttrs (_key: val: handler (foldl' val {} mockHomeConfigFilesInternalAttrs)) toFetchers;
   withFileContents = mapAttrs (_key: val: readFile val.source) withFetched;
   final = withFileContents;
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

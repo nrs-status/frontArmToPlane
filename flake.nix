@@ -13,8 +13,9 @@
         };
         nixpkgslessLclInputs = pkgs: rec {
             pkgslib = pkgs.lib;
-            baselib = import ./lighthouse_alexandria { inherit pkgslib; nixvimFlake = inputs.nixvimFlake; };
-            tclib = import ./colossus_rhodes { inherit pkgslib baselib; };
+            prelib = import ./bill_projects_belt { inherit pkgslib; };
+            tclib = import ./colossus_rhodes { inherit pkgslib prelib; };
+            baselib = import ./lighthouse_alexandria { inherit pkgslib prelib tclib; nixvimFlake = inputs.nixvimFlake; };
             tc = tclib.tc;
             nixvimFlake = inputs.nixvimFlake;
         };

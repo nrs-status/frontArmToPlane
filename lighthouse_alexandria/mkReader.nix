@@ -1,4 +1,4 @@
-{ pkgslib }:
+{ prelib, pkgslib }:
 { readerFields, activateDebug ? false }:
 let total = rec {
   mkExtendables = import ./mkExtendablesForReader.nix { inherit pkgslib; };
@@ -10,6 +10,6 @@ let total = rec {
       extensionFunc = x: y: x ++ y;
     };
   };
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

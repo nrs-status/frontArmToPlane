@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, mockHomeExtensions, homeManagerFlake, activateDebug ? false }:
+{ prelib, pkgs, stateVersion, mockHomeExtensions, homeManagerFlake, activateDebug ? false }:
 with builtins; 
 let total = rec {
   mockHomeConfig = {
@@ -14,6 +14,6 @@ let total = rec {
     modules = [ (mockHomeConfig // concatedExtensions) ];
   }; 
   final = homeManagerOutput;
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

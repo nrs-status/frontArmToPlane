@@ -1,16 +1,16 @@
-{ baselib, pkgslib }:
+{ prelib, pkgslib }:
 {
-  typecheck = import ./typecheck.nix { inherit baselib pkgslib; };
-  predicates = baselib.importPairAttrsOfDir {
+  typecheck = import ./typecheck.nix { inherit prelib pkgslib; };
+  predicates = prelib.importPairAttrsOfDir {
     filePath = ./predicates;
     inputForImportPairs = {
       inputs = {
-        inherit baselib pkgslib;
+        inherit prelib pkgslib;
       };
     };
   };
-  tc = import ./tc.nix { inherit baselib pkgslib; };
+  tc = import ./tc.nix { inherit prelib pkgslib; };
   stdTcError = import ./stdTcError.nix;
   addStdHandler = import ./addStdHandler.nix;
-  mkHasFieldsPredicate = import ./mkHasFieldsPredicate.nix { inherit baselib pkgslib; };
+  mkHasFieldsPredicate = import ./mkHasFieldsPredicate.nix { inherit prelib pkgslib; };
 }

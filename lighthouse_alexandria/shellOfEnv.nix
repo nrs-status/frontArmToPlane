@@ -1,4 +1,4 @@
-{ pkgs, env, activateDebug ? false }:
+{ prelib, pkgs, env, activateDebug ? false }:
 let total = rec {
   final = pkgs.mkShell {
     packages = env.packagesFromNixpkgs ++ env.packagesFromLocalRepo;
@@ -6,6 +6,6 @@ let total = rec {
     ${env.shellHook}
     '';
   };
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

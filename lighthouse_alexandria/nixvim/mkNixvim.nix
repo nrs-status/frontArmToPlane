@@ -1,4 +1,4 @@
-{ pkgslib, nixvimFlake, activateDebug ? false }:
+{ prelib, pkgslib, nixvimFlake, activateDebug ? false }:
 { lclInputs, system, pkgs, types }:
 {symlinkJoinName, etc, keymaps, opts, filetype, pluginsList, extraPlugins, extraConfigLuaList, extraPackages}:
 with builtins;
@@ -22,7 +22,7 @@ let total = rec {
     paths = [(total.nixvimMaker total.argToNixvimMaker)];
   };
 };
-in (import ../wrapDebug.nix) {
+in prelib.wrapDebug {
   inherit activateDebug total;
 }
 

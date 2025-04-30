@@ -1,4 +1,4 @@
-{ envsdir, lclpkgsdir, outputDeclAttrs, activateDebug ? false }:
+{ prelib, envsdir, lclpkgsdir, outputDeclAttrs, activateDebug ? false }:
 with builtins;
 let total = rec {
 
@@ -47,6 +47,6 @@ let total = rec {
     devShells = foldIntoDevShellsVal;
     byproducts = clipFirstAttr;
   };
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }

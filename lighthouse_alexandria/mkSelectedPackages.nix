@@ -1,4 +1,4 @@
-{ reader, lclpkgsdir, activateDebug ? false }:
+{ prelib, reader, lclpkgsdir, activateDebug ? false }:
 let total = rec {
   pkgOfPath = path: { 
     key = path;
@@ -25,6 +25,6 @@ let total = rec {
   deepMerge = import ./deepMerge.nix;
   foldIntoAttrs = builtins.foldl' deepMerge {} (builtins.map keyValPairsAsSingleKeyAttrs selectedPackagesAsKeyValPairs);
   final = foldIntoAttrs;
-}; in (import ./wrapDebug.nix) {
+}; in prelib.wrapDebug {
   inherit total activateDebug;
 }
