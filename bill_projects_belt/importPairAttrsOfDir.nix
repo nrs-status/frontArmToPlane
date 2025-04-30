@@ -8,14 +8,8 @@ let total = rec {
   };
   mkImportPair = path: import ./mkImportPair.nix { inherit pkgslib; } { importInputs = inputForImportPairs; filePath = path; };
   importPairList = map mkImportPair filesList;
-  testWf = attrs: if length (attrNames attrs) == 1 then attrs else throw ("importPairAttrsOfDir.nix: when skipping attribute 'default', found a value with more than one key:" + (toString (attrNames attrs)));
-  skipDefaultAttr = keyvalpair:
-    if keyvalpair.name == "default" then { 
-      name = elemAt (attrNames (testWf keyvalpair.value)) 0;
-      value = elemAt (attrValues keyvalpair.value) 0;
-    } else keyvalpair;
-  importsWithSkippedDefaultAttr = map skipDefaultAttr importPairList;
-  final = listToAttrs importsWithSkippedDefaultAttr;
+  foldIntoAttrs = foldl' (acc: next: acc // { ${next.name} = next.value; }) {} importPairList;
+  final = foldIntoAttrs;
 
 }; in (import ./wrapDebug.nix) {
   inherit total activateDebug;
