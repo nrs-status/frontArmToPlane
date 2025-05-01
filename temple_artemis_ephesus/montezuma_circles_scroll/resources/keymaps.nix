@@ -94,7 +94,7 @@
     mode = [ "i" ];
   }
   {
-    action = ''<Cmd>lua require("conform").format()'';
+    action = ''<Cmd>lua require("conform").format()<cr>'';
     key = "<leader>m";
     mode = [ "n" ];
   }
