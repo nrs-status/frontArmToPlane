@@ -1,0 +1,7 @@
+default-extensions:
+	AllowAmbiguousTypes,
+	OverloadedStrings,
+	LambdaCase,
+	DataKinds,
+	TypeFamilies
+
