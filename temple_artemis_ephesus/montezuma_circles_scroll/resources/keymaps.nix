@@ -109,26 +109,33 @@
       key = "<leader>gd";
       mode = ["n"];
     }
-    #currently not working, at least with ts and python
-    {
-      action = "<Cmd>vim.lsp.buf.type_definition()<cr>";
-      key = "<leader>gy";
-      mode = ["n"];
-    }
-    #currently not working, at least with ts and python
+  {
+    action = "<Cmd>lua vim.lsp.buf.type_definition()<cr>";
+    key = "<leader>gy";
+    mode = ["n"];
+  }
 
-    {
-      action = "<cmd>vim.lsp.buf.implementation()<cr>";
-      key = "<leader>gi";
-      mode = ["n"];
-    }
-    #currently not working, at least with ts and python
+  {
+    action = "<Cmd>lua vim.lsp.buf.implementation()<cr>";
+    key = "<leader>gi";
+    mode = ["n"];
+  }
 
-    # {
-    #   action = "<cmd>vim.lsp.buf.code_action()<cr>";
-    #   key = "<leader>ca";
-    #   mode = ["n"];
-    # }
+  {
+    action = "<Cmd>lua vim.lsp.buf.code_action()<cr>";
+    key = "<leader>ca";
+    mode = ["n"];
+  }
+  {
+    action = "<Cmd>lua vim.diagnostic.goto_next()<cr>";
+    key = "<leader>j";
+    mode = ["n"];
+  }
+  {
+    action = "<Cmd>lua vim.diagnostic.goto_prev()<cr>";
+    key = "<leader>k";
+    mode = ["n"];
+  }
     {
       action = "$";
       key = "<leader>ll";
