@@ -31,7 +31,7 @@
           "workEnv"
         ];
         packagesToProvide = [
-          [ "nixvim" "base" ]
+          [ "montezuma_circles_scroll" "nixvim" "base" ]
         ];
         wUnstable = {
           nixpkgs = inputs.nixpkgsUnstable;
