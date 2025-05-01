@@ -27,7 +27,7 @@ let total = rec {
       hls = {
         enable = true;
         package = null;
-        cmd = [ "haskell-language-server" ];
+        cmd = [ "haskell-language-server --lsp" ];
       };
 
       coq_lsp = {
