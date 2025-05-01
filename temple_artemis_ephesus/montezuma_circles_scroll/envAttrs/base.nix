@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   symlinkJoinName = "baseNixvimEnv";
   etc = ../resources/etc.nix;
@@ -16,5 +16,8 @@
     /tabKeyFunc.lua
     /toggleAbsRelNums.lua
   ];
-  extraPackages = [];
+  extraPackages = with pkgs; [
+    #used by conform-nvim
+    nixfmt # nix official formatter
+  ];
 }

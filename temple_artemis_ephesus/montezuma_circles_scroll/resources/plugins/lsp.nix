@@ -28,6 +28,13 @@ let total = rec {
         enable = true;
         package = null;
         cmd = [ "haskell-language-server" "--lsp" ];
+        settings = {
+            plugin = {
+              hlint = {
+                globalOn = true;
+              };
+            };
+          };
       };
 
       coq_lsp = {
