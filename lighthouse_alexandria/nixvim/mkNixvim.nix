@@ -19,7 +19,7 @@ let total = rec {
   }; 
   final = pkgs.symlinkJoin {
     name = symlinkJoinName;
-    paths = [(total.nixvimMaker total.argToNixvimMaker)];
+    paths = extraPackages ++ [ (total.nixvimMaker total.argToNixvimMaker)];
   };
 };
 in prelib.wrapDebug {

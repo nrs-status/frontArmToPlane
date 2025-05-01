@@ -5,7 +5,7 @@ let total = rec {
   };
   output = {
     nixvim = {
-      base = mkNixvim (import ./envAttrs/base.nix {});
+      base = mkNixvim (import ./envAttrs/base.nix { inherit pkgs; });
       lean = mkNixvim (import ./envAttrs/forLean.nix { inherit lclInputs; });
       webDev = mkNixvim (import ./envAttrs/forWebDev.nix { inherit lclInputs; });
     };
