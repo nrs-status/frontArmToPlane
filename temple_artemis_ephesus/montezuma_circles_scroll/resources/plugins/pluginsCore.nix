@@ -109,6 +109,7 @@ let total = rec {
 
     conform-nvim = {
       enable = true;
+      autoLoad = true;
       formattersByFt = {
         clojure = ["cljstyle"];
         haskell = ["ormolu"];
