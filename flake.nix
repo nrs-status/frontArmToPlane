@@ -10,7 +10,7 @@
     let
       total = rec {
         lclInputslessTypes = lclInputs:
-          lclInputs.baselib.mkTypesAttrs {
+          lclInputs.prelib.mkTypesAttrs {
             typesdir = ./mauso_halicarnassus;
             importsToPass = { inherit lclInputs; };
           };
