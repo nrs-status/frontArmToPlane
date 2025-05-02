@@ -6,7 +6,6 @@
   extendNixvimEnvAttrs1 = import ./nixvim/extendNixvimEnvAttrs1.nix;
   extendEnv = import ./extendEnv.nix { inherit prelib pkgslib; };
   mkLclPkgs = import ./mkLclPkgs.nix;
-  mkTypesAttrs = import ./mkTypesAttrs.nix { inherit prelib pkgslib; };
   shellOfEnv = import ./shellOfEnv.nix;
   deepMerge = import ./deepMerge.nix;
   mkMockHMOutputAndExtractFiles = import ./mkMockHMOutputAndExtractFiles.nix;

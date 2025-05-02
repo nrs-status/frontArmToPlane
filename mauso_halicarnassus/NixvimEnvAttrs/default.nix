@@ -1,6 +1,7 @@
 { lclInputs }:
 with lclInputs;
-{
+with tclib.types;
+tc TypeDecl {
   typeName = "NixvimEnvAttrs";
   preds = [
     (tclib.mkHasFieldsPredicate { fields = [

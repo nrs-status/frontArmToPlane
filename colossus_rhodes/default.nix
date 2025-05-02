@@ -13,4 +13,8 @@
   stdTcError = import ./stdTcError.nix;
   addStdHandler = import ./addStdHandler.nix;
   mkHasFieldsPredicate = import ./mkHasFieldsPredicate.nix { inherit prelib pkgslib; };
+  types = prelib.mkTypesAttrs {
+    typesdir = ./primTypes;
+    importsToPass = { inherit prelib pkgslib; };
+  };
 }
