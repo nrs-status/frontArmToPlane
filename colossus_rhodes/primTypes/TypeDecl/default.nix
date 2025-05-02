@@ -1,13 +1,13 @@
 { prelib, pkgslib }:
 let
-  mkHasFieldsPredicate =
-    import ../../mkHasFieldsPredicate.nix { inherit prelib pkgslib; };
+  mkHasExactFieldsPredicate =
+    import ../../mkHasExactFieldsPredicate.nix { inherit prelib pkgslib; };
   mkFieldHasTypePredicate =
     import ../../mkFieldHasTypePredicate.nix { inherit prelib pkgslib; };
 in {
   typeName = "TypeDecl";
   preds = [
-    (mkHasFieldsPredicate { fields = [ "typeName" "preds" ]; })
+    (mkHasExactFieldsPredicate { fields = [ "typeName" "preds" ]; })
     (mkFieldHasTypePredicate {
       field = "typeName";
       type = (import ../String);

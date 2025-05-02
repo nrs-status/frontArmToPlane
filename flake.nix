@@ -12,7 +12,7 @@
         lclInputslessTypes = lclInputs:
           lclInputs.prelib.importPairAttrsOfDir {
             filePathForRecursiveFileListing = ./mauso_halicarnassus;
-            inputForImportPairs = { inherit lclInputs; };
+            inputsForImportPairs = { inherit lclInputs; };
           };
         nixpkgslessLclInputs = pkgs: rec {
           pkgslib = pkgs.lib;

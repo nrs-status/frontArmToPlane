@@ -8,16 +8,16 @@ let
     failures = target:
       pkgslib.filterAttrs (_key: val: val == false) (tagMissingFields target);
     predicate = rec {
-      predname = "hasFields";
+      predname = "hasExactFields_${toString fields}_";
       function = target: {
-        testresult = length (attrNames (failures target)) > 0;
-        inherit failures;
+        testResult = length (attrNames (failures target)) > 0;
+        failuresResult = failures target;
       };
       handler = { target, type }:
-        if (function target).testresult then
+        if (function target).testResult then
           abort
           ("${type.typeName} failed to typecheck due to hasFields predicate; the following fields are unexpected: ${
-              attrNames result.failures
+              toString (attrNames (function target).failuresResult)
             }")
         else
           target;

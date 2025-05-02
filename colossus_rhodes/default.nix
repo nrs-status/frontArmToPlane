@@ -3,7 +3,7 @@
   typecheck = import ./typecheck.nix { inherit prelib pkgslib; };
   predicates = prelib.importPairAttrsOfDir {
     filePathForRecursiveFileListing = ./predicates;
-    inputForImportPairs = {
+    inputsForImportPairs = {
       lclInputs = {
         inherit prelib pkgslib;
       };
@@ -12,9 +12,9 @@
   tc = import ./tc.nix { inherit prelib pkgslib; };
   stdTcError = import ./stdTcError.nix;
   addStdHandler = import ./addStdHandler.nix;
-  mkHasFieldsPredicate = import ./mkHasFieldsPredicate.nix { inherit prelib pkgslib; };
-  types = prelib.mkTypesAttrs {
-    typesdir = ./primTypes;
-    importsToPass = { inherit prelib pkgslib; };
+  mkHasExactFieldsPredicate = import ./mkHasExactFieldsPredicate.nix { inherit prelib pkgslib; };
+  types = prelib.importPairAttrsOfDir {
+    filePathForRecursiveFileListing = ./primTypes;
+    inputsForImportPairs = { inherit prelib pkgslib; };
   };
 }

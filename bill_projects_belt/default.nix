@@ -7,5 +7,4 @@
   wrapDebug = import ./wrapDebug.nix;
   wrapSubstitutingDebug = import ./wrapSubstitutingDebug.nix;
   wrapOutputtingDebug = import ./wrapOutputtingDebug.nix { inherit pkgslib; };
-  mkTypesAttrs = import ./mkTypesAttrs.nix { inherit pkgslib; };
 }

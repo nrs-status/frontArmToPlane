@@ -1,7 +1,7 @@
 { pkgs, prelib, types, pkgslib, envsdir, lclInputs, lclPkgs }:
 prelib.importPairAttrsOfDir {
     filePathForRecursiveFileListing = envsdir;
-    inputForImportPairs = {
+    inputsForImportPairs = {
       inherit types lclInputs lclPkgs pkgs;
     };
 }

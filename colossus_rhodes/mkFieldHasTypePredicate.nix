@@ -3,14 +3,22 @@
 with builtins;
 let
   total = rec {
-    hasFieldPred =
-      (import ./mkHasFieldsPredicate.nix { inherit prelib pkgslib; }) {
-        fields = [ field ];
+    hasFieldPred = import ./functionToPredicate.nix {
+      predName = "hasField_${field}_";
+      function = target: hasAttr field target;
       };
-    fieldTypechecks = target:
-      (import ./tc) { inherit prelib pkgslib; } type target.${field};
+    hasFieldTempType = {
+      typeName = "temphasField_${field}_";
+      preds = [ hasFieldPred ];
+    };
+    tc = import ./tc.nix { inherit prelib pkgslib; };
+    fieldTypechecks = target: tc type target.${field};
     hasFieldAndFieldTypeChecks = target:
-      seq (hasFieldPred target) (fieldTypechecks target);
-    final = hasFieldAndFieldTypeChecks;
+      seq (tc hasFieldTempType target) (fieldTypechecks target);
+    protoPred = (import ./functionToPredicate.nix { inherit prelib; } {
+      predName = "field_${field}_hasType_${type.typeName}_";
+      function = hasFieldAndFieldTypeChecks;
+    });
+    final = import ./addStdHandler.nix protoPred;
   };
 in prelib.wrapDebug { inherit total activateDebug; }

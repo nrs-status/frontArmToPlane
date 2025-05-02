@@ -3,7 +3,7 @@ let total = rec {
   inherit args;
   filteredFilePaths = prelib.importPairAttrsOfDir {
    filePathForRecursiveFileListing = lclpkgsdir;
-   inputForImportPairs = {
+   inputsForImportPairs = {
      inherit lclInputs system types pkgs;
    };
  };

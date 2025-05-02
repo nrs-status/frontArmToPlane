@@ -4,7 +4,7 @@ with tclib.types;
 tc TypeDecl {
   typeName = "NixvimEnvAttrs";
   preds = [
-    (tclib.mkHasFieldsPredicate { fields = [
+    (tclib.mkHasExactFieldsPredicate { fields = [
       "plugins" "filetype" "extraPlugins" "extraConfigLua" "extraPackages"
     ]; })
     tclib.predicates.nonEmptyAttrs
