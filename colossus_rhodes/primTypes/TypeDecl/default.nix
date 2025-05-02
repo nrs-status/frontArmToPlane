@@ -10,11 +10,11 @@ in {
     (mkHasExactFieldsPredicate { fields = [ "typeName" "preds" ]; })
     (mkFieldHasTypePredicate {
       field = "typeName";
-      type = (import ../String);
+      type = (import ../String { inherit prelib; });
     })
     (mkFieldHasTypePredicate {
       field = "preds";
-      type = (import ../List) (import ../NixFunction);
+      type = (import ../List {}) (import ../NixFunction);
     })
   ];
 }

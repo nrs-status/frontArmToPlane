@@ -3,7 +3,7 @@
 with builtins;
 let
   total = rec {
-    hasFieldPred = import ./functionToPredicate.nix {
+    hasFieldPred = import ./functionToPredicate.nix {inherit prelib;} {
       predName = "hasField_${field}_";
       function = target: hasAttr field target;
       };

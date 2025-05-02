@@ -1,50 +1,46 @@
 { lclInputs, types, activateDebug ? false, ... }:
 with lclInputs;
 with types;
-let total = rec { 
-  final = tc PluginSlice tcInput;
-  tcInput = {
-  lsp = {
-    enable = true;
-    servers = {
-
-      #with nixpkgs-given lsp package
-      nixd.enable = true;
-      bashls.enable = true;
-
-      #with no default lsp package
-      lua-ls= {
+let
+  total = rec {
+    final = tc PluginSlice tcInput;
+    tcInput = {
+      lsp = {
         enable = true;
-        settings.telemetry.enable = false;
-        package = null;
-      };
+        servers = {
 
-      ocamllsp = {
-        enable = true;
-        package = null;
-      };
+          #with nixpkgs-given lsp package
+          nixd.enable = true;
+          bashls.enable = true;
 
-      hls = {
-        enable = true;
-        package = null;
-        cmd = [ "haskell-language-server" "--lsp" ];
-        settings = {
-            plugin = {
-              hlint = {
-                globalOn = true;
-              };
-            };
+          #with no default lsp package
+          lua-ls = {
+            enable = true;
+            settings.telemetry.enable = false;
+            package = null;
           };
-      };
 
-      coq_lsp = {
-        enable = true;
-        package = null;
-        cmd = ["coq-lsp"];
+          ocamllsp = {
+            enable = true;
+            package = null;
+          };
+
+          hls = {
+            enable = true;
+            package = null;
+            cmd = [ "haskell-language-server" "--lsp" ];
+            settings = { plugin = { hlint = { globalOn = true; }; }; };
+          };
+
+          coq_lsp = {
+            enable = true;
+            package = null;
+            cmd = [ "coq-lsp" ];
+          };
+
+          nickel_ls = { enable = true; };
+        };
       };
     };
   };
-};
-}; in prelib.wrapDebug {
-  inherit total activateDebug;
-}
+in prelib.wrapDebug { inherit total activateDebug; }
