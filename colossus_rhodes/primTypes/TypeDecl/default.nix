@@ -14,7 +14,7 @@ in {
     })
     (mkFieldHasTypePredicate {
       field = "preds";
-      type = (import ../List) (import ../NixFunction)
+      type = (import ../List) (import ../NixFunction);
     })
   ];
 }

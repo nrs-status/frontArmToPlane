@@ -8,14 +8,16 @@ rec {
   prelib = import ../bill_projects_belt { inherit pkgslib; };
   tclib = import ../colossus_rhodes { inherit pkgslib prelib; };
   baselib = import ../lighthouse_alexandria { inherit pkgslib prelib tclib; nixvimFlake = flakeInputs.nixvimFlake; };
-  types = baselib.mkTypesAttrs {
+  lcltypes = prelib.mkTypesAttrs {
     typesdir = ../mauso_halicarnassus;
     importsToPass = {
       lclInputs = {
         inherit pkgslib baselib tclib prelib;
+        tc = tclib.tc;
       };
     };
   };
+  types = tclib.types // lcltypes;
   outputDecl = {
     lclInputs = (types // rec {
       inherit baselib pkgslib pkgs;
@@ -36,7 +38,7 @@ rec {
     ];
   };
   system = "x86_64-linux";
-  base = import ../temple_artemis_ephesus/montezuma_circles_scroll/envAttrs/base.nix {};
+  base = import ../temple_artemis_ephesus/montezuma_circles_scroll/envAttrs/base.nix { inherit pkgs; };
   lclInputs = {
     inherit tclib baselib prelib;
     tc = tclib.tc;

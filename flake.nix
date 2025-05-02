@@ -10,9 +10,9 @@
     let
       total = rec {
         lclInputslessTypes = lclInputs:
-          lclInputs.prelib.mkTypesAttrs {
-            typesdir = ./mauso_halicarnassus;
-            importsToPass = { inherit lclInputs; };
+          lclInputs.prelib.importPairAttrsOfDir {
+            filePathForRecursiveFileListing = ./mauso_halicarnassus;
+            inputForImportPairs = { inherit lclInputs; };
           };
         nixpkgslessLclInputs = pkgs: rec {
           pkgslib = pkgs.lib;
@@ -60,6 +60,7 @@
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclAttrs = { inherit wUnstable w2411; };
+          activateDebug = true;
         };
       };
     in total.mkOutputResult;

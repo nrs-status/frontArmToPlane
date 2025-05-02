@@ -10,7 +10,7 @@ let
     fieldTypechecks = target:
       (import ./tc) { inherit prelib pkgslib; } type target.${field};
     hasFieldAndFieldTypeChecks = target:
-      seq (hasFieldPred target) (fieldTypchecks target);
+      seq (hasFieldPred target) (fieldTypechecks target);
     final = hasFieldAndFieldTypeChecks;
   };
 in prelib.wrapDebug { inherit total activateDebug; }
