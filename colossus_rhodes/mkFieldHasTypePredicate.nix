@@ -12,7 +12,7 @@ let
       preds = [ hasFieldPred ];
     };
     tc = import ./tc.nix { inherit prelib pkgslib; };
-    fieldTypechecks = target: tc type target.${field};
+    fieldTypechecks = target: foldl' (acc: next: acc && next.function target) true type.preds;
     hasFieldAndFieldTypeChecks = target:
       seq (tc hasFieldTempType target) (fieldTypechecks target);
     protoPred = (import ./functionToPredicate.nix { inherit prelib; } {

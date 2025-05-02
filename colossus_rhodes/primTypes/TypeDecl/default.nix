@@ -12,9 +12,9 @@ in {
       field = "typeName";
       type = (import ../String { inherit prelib; });
     })
-    (mkFieldHasTypePredicate {
-      field = "preds";
-      type = (import ../List {}) (import ../NixFunction);
-    })
+    # (mkFieldHasTypePredicate {
+    #   field = "preds";
+    #   type = (import ../List {}) (import ../NixFunction);
+    # })
   ];
 }

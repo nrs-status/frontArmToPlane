@@ -6,9 +6,9 @@ rec {
   prelib = import ../bill_projects_belt { inherit pkgslib; };
   tclib = import ../colossus_rhodes { inherit pkgslib prelib; };
   baselib = import ../lighthouse_alexandria { inherit pkgslib prelib tclib nixvimFlake; };
-  lcltypes = prelib.mkTypesAttrs {
-    typesdir = ../mauso_halicarnassus;
-    importsToPass = {
+  lcltypes = prelib.importPairAttrsOfDir {
+    filePathForRecursiveFileListing = ../mauso_halicarnassus;
+    inputsForImportPairs = {
       lclInputs = {
         inherit pkgslib baselib tclib prelib;
         tc = tclib.tc;
@@ -17,15 +17,4 @@ rec {
   };
   types = lcltypes // tclib.types;
   tc = tclib.tc;
-  mylist = tclib.typecheck {
-    target = [ "hi" "yo" ];
-    type = types.List types.String;
-    activateDebug = true;
-  };
-  newtypes = prelib.mkTypesAttrs {
-    typesdir = ../colossus_rhodes/primTypes;
-    inputsToPass = { inherit prelib pkgslib;};
-    activateDebug = true;
-  };
-  newtypes' = prelib.importPairAttrsOfDir { filePathForRecursiveFileListing = ../colossus_rhodes/primTypes; inputForImportPairs = { inherit prelib pkgslib;}; };
 }

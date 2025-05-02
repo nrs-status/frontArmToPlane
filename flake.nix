@@ -60,7 +60,7 @@
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclAttrs = { inherit wUnstable w2411; };
-          activateDebug = true;
+          activateDebug = false;
         };
       };
     in total.mkOutputResult;
