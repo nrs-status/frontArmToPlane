@@ -10,5 +10,6 @@
   deepMerge = import ./deepMerge.nix;
   mkMockHMOutputAndExtractFiles = import ./mkMockHMOutputAndExtractFiles.nix;
   mkHMOutput = import ./mkHMOutput.nix;
+  mkOutput = import ./mkOutput.nix;
 }
 
