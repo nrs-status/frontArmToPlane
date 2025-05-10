@@ -3,7 +3,7 @@
     nixpkgsUnstable.url = "github:NixOs/nixpkgs/nixos-unstable";
     nixvimFlake.url = "github:nix-community/nixvim";
     nixpkgs2411.url = "github:NixOs/nixpkgs/nixos-24.11";
-    prelibBootstrapNixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    bootstrapNixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   };
 
   outputs = inputs:
@@ -36,6 +36,17 @@
           "defaultCabalConfig"
 
         ];
+        bootstrapped = rec {
+          pkgs =
+            import inputs.bootstrapNixpkgs { system = "x86_64-linux"; };
+          prelib =
+            import ./bill_projects_belt { pkgslib = bootstrapped.pkgs.lib; };
+          tclib = import ./colossus_rhodes {
+            prelib = bootstrapped.prelib;
+            pkgslib = bootstrapped.pkgs.lib;
+          };
+          types = bootstra
+        };
         wUnstable = {
           nixpkgs = inputs.nixpkgsUnstable;
           inherit nixpkgsConfig supportedSystems envsToProvide
@@ -49,11 +60,6 @@
             packagesToProvide;
           lclInputs = nixpkgslessLclInputs;
           types = lclInputslessTypes;
-        };
-        bootstrappedPrelib = import ./bill_projects_belt {
-          pkgslib = (import inputs.prelibBootstrapNixpkgs {
-            system = "x86_64-linux";
-          }).lib;
         };
         mkOutputResult = (import ./lighthouse_alexandria/mkOutput.nix) {
           prelib = bootstrappedPrelib;

@@ -1,16 +1,15 @@
-{ lclInputs }:
+{ lclInputs, types, ... }:
+with types;
 with lclInputs;
-with tclib.types;
-tc TypeDecl {
+baselib.mkRecordType {
   typeName = "OutputDecl";
-  preds = [
-    (tclib.predicates.isAttrs)
-    (tfield Attrset "nixpkgs")
-    (tfield Attrset "nixpkgsConfig")
-    (tfield NixFunction "types")
-    (tfield NixFunction "lclInputs")
-    (tfield (List String) "packagesToProvide")
-    (tfield (List String) "envsToProvide")
-    (tfield (List String) "supportedSystems")
-  ];
+  fieldsAndTypesAttrs = {
+    nixpkgs = Attrset;
+    nixpkgsConfig = List String;
+    supportedSystem = List String;
+    envsToProvide = List String;
+    packagesToProvide = List String;
+    lclInputs = NixFunction;
+    types = NixFunction;
+  };
 }
