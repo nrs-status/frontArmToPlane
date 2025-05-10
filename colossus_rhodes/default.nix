@@ -17,4 +17,5 @@
     filePathForRecursiveFileListing = ./primTypes;
     inputsForImportPairs = { inherit prelib pkgslib; };
   };
+  tfield = type: fieldName: import ./mkFieldHasTypePredicate.nix { inherit prelib pkgslib; } { field = fieldName; inherit type; };
 }
