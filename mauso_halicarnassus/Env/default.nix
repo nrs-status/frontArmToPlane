@@ -4,7 +4,7 @@ with tclib.types;
 tc TypeDecl {
   typeName = "Env";
   preds = [
-    (lclInputs.tclib.mkHasExactFieldsPredicate { fields = [
+    (tclib.mkHasExactFieldsPredicate { fields = [
       "name" "packagesFromNixpkgs" "packagesFromLocalRepo" "shellHook"
     ]; })
   ];
