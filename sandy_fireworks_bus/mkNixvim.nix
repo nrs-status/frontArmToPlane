@@ -1,7 +1,8 @@
-{ prelib, pkgslib, nixvimFlake, activateDebug ? false }:
+{ prs, nixvimFlake, activateDebug ? false }:
 { lclInputs, system, pkgs, types }:
 {symlinkJoinName, etc, keymaps, opts, filetype, pluginsList, extraPlugins, extraConfigLuaList, extraPackages}:
 with builtins;
+with prs;
 let total = rec {
   nixvimMaker = nixvimFlake.legacyPackages.${system}.makeNixvimWithModule;
   extraConfigLua = foldl' (acc: next: acc + readFile next) "" extraConfigLuaList;
