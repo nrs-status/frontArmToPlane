@@ -8,7 +8,7 @@ let
     failures = target:
       pkgslib.filterAttrs (_key: val: val == false) (tagMissingFields target);
     predicate = rec {
-      predname = "hasExactFields_${toString fields}_";
+      predName = "hasExactFields_${toString fields}_";
       function = target: {
         testResult = length (attrNames (failures target)) > 0;
         failuresResult = failures target;
