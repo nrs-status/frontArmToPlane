@@ -9,14 +9,15 @@
 
   outputs = inputs:
     let
-      total = rec {
-        prs = inputs.peachRampSkateboard;
+      prs = inputs.peachRampSkateboard;
+      total = with prs; rec {
+        inherit prs;
         lclInputslessTypes = lclInputs:
-          prs.prelib.importPairAttrsOfDir {
+          prelib.importPairAttrsOfDir {
             filePathForRecursiveFileListing = ./mauso_halicarnassus;
             inputsForImportPairs = { inherit lclInputs; };
           };
-        nixpkgslessLclInputs = pkgs: rec {
+        nixpkgslessLclInputs = _: rec {
           inherit prs;
           lcllib = import ./sandy_fireworks_bus {
             inherit prs;
@@ -34,7 +35,7 @@
           [ "montezuma_circles_scroll" "nixvim" "base" ]
           "defaultCabalConfig"
         ];
-        wUnstable = prs.tc {
+        wUnstable = tclib.tc tclib.types.OutputDecl {
           nixpkgs = inputs.nixpkgsUnstable;
           inherit nixpkgsConfig supportedSystems envsToProvide
             packagesToProvide;
@@ -48,7 +49,7 @@
           lclInputs = nixpkgslessLclInputs;
           types = lclInputslessTypes;
         };
-        mkOutputResult = prs.baselib.mkOutput {
+        mkOutputResult = baselib.mkOutput {
           envsdir = ./pyramid_giza;
           lclpkgsdir = ./temple_artemis_ephesus;
           outputDeclAttrs = { inherit wUnstable w2411; };
