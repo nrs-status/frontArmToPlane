@@ -1,9 +1,10 @@
-{ lclInputs }:
-with lclInputs;
-with tclib.types;
-tc TypeDecl {
+{ tclib, ... }:
+{
   typeName = "PluginSlice";
-  preds = [
-    lclInputs.tclib.predicates.nonEmptyAttrs
+  spec = [
+    {
+    path = [];
+      pred = tclib.predicates.nonEmptyAttrs;
+    }
   ];
 }

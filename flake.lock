@@ -179,11 +179,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1747014229,
-        "narHash": "sha256-k5XPGoDHtIKVA/76zsapufq8Fp5z24rqT+EdGgu6/kQ=",
+        "lastModified": 1747016197,
+        "narHash": "sha256-8q4KzxYwiSBMj4ajKlf0uBdkqG7QFJky4v+mqJB0+5I=",
         "owner": "nrs-status",
         "repo": "peachRampSkateboard",
-        "rev": "f8b5268e6064472a21a318e4f40bd11b8d50a947",
+        "rev": "ec9dc999ad37392c685ee2bbb12b16ad6d831880",
         "type": "github"
       },
       "original": {

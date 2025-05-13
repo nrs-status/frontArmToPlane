@@ -1,6 +1,6 @@
 { lclInputs, pkgs, system, types, activateDebug ? false }:
 let total = rec {
-  mkNixvim = lclInputs.baselib.preMkNixvim {
+  mkNixvim = lclInputs.lcllib.preMkNixvim {
     inherit lclInputs system pkgs types;
   };
   output = {

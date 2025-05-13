@@ -15,10 +15,16 @@
         lclInputslessTypes = lclInputs:
           prelib.importPairAttrsOfDir {
             filePathForRecursiveFileListing = ./mauso_halicarnassus;
-            inputsForImportPairs = { inherit lclInputs; };
+            inputsForImportPairs = {
+              tclib = prs.tclib;
+            };
           };
         nixpkgslessLclInputs = _: rec {
-          inherit prs;
+          prelib = prs.prelib;
+          baselib = prs.baselib;
+          pkgslib = prs.pkgslib;
+          tclib = prs.tclib;
+          tc = prs.tclib.tc;
           lcllib = import ./sandy_fireworks_bus {
             inherit prs;
             nixvimFlake = inputs.nixvimFlake;
@@ -35,7 +41,8 @@
           [ "montezuma_circles_scroll" "nixvim" "base" ]
           "defaultCabalConfig"
         ];
-        wUnstable = tclib.tc tclib.types.OutputDecl {
+        #wUnstable = tclib.tc tclib.types.OutputDecl {
+        wUnstable = {
           nixpkgs = inputs.nixpkgsUnstable;
           inherit nixpkgsConfig supportedSystems envsToProvide
             packagesToProvide;
