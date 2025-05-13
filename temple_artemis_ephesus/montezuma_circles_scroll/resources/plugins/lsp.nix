@@ -39,6 +39,8 @@ let
           };
 
           nickel_ls = { enable = true; };
+
+          ts_ls = {enable =true;};
         };
       };
     };
