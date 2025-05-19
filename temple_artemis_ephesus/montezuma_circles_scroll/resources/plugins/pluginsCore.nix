@@ -133,7 +133,16 @@ let total = rec {
     #adds pictograms to lsp
     lspkind.enable = true;
     conjure.enable = true;
+    lint = {
+      enable = true;
+      lintersByFt = {
+        clojure = [
+          "clj-kondo"
+        ];
+      };
+    };
   };
+
 }; in prelib.wrapDebug {
   inherit total activateDebug;
 }
