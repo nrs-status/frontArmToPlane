@@ -135,6 +135,7 @@ let total = rec {
     conjure.enable = true;
     lint = {
       enable = true;
+      autoLoad = true;
       lintersByFt = {
         clojure = [
           "clj-kondo"
