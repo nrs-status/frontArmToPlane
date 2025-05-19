@@ -111,7 +111,7 @@ let total = rec {
       enable = true;
       autoLoad = true;
       formattersByFt = {
-        clojure = ["cljstyle"];
+        clojure = ["cljfmt"];
         haskell = ["ormolu"];
         javascript = ["prettierd"];
         javascriptreact = ["prettierd"];
@@ -132,6 +132,7 @@ let total = rec {
 
     #adds pictograms to lsp
     lspkind.enable = true;
+    conjure.enable = true;
   };
 }; in prelib.wrapDebug {
   inherit total activateDebug;
