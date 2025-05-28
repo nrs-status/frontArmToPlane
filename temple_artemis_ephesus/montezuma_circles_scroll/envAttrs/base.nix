@@ -8,9 +8,12 @@
     /cmp.nix
     /lsp.nix
     /pluginsCore.nix
+    /lisps.nix
   ];
   filetype = {};
-  extraPlugins = [];
+  extraPluginsList = builtins.map (path : ../resources/extraPlugins + path) [
+    /sexpRelated.nix
+  ];
   extraConfigLuaList = builtins.map (path: ../resources/extraConfigLua + path) [
     /rememberFolds.lua
     /tabKeyFunc.lua

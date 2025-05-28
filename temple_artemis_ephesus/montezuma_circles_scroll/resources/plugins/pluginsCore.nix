@@ -111,6 +111,7 @@ let total = rec {
       enable = true;
       autoLoad = true;
       formattersByFt = {
+        fennel = ["fnlfmt"];
         clojure = ["cljfmt"];
         haskell = ["ormolu"];
         javascript = ["prettierd"];
@@ -132,16 +133,6 @@ let total = rec {
 
     #adds pictograms to lsp
     lspkind.enable = true;
-    conjure.enable = true;
-    lint = {
-      enable = true;
-      autoLoad = true;
-      lintersByFt = {
-        clojure = [
-          "clj-kondo"
-        ];
-      };
-    };
   };
 
 }; in prelib.wrapDebug {
