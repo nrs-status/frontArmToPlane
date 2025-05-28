@@ -1,5 +1,5 @@
 { prs, nixvimFlake, activateDebug ? false }:
-{ lclInputs, system, bpkgs, types }:
+{ lclInputs, system, pkgs, types }:
 { symlinkJoinName, etc, keymaps, opts, filetype, pluginsList, extraPluginsList
 , extraConfigLuaList, extraPackages }:
 with builtins;
@@ -24,7 +24,7 @@ let
         inherit plugins;
       };
     };
-    final = bpkgs.symlinkJoin {
+    final = pkgs.symlinkJoin {
       name = symlinkJoinName;
       paths = extraPackages ++ [ (total.nixvimMaker total.argToNixvimMaker) ];
     };

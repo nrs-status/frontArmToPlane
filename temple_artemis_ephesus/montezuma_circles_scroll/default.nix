@@ -1,11 +1,11 @@
-{ lclInputs, bpkgs, system, types, activateDebug ? false }:
+{ lclInputs, pkgs, system, types, activateDebug ? false }:
 let total = rec {
   mkNixvim = lclInputs.lcllib.preMkNixvim {
-    inherit lclInputs system bpkgs types;
+    inherit lclInputs system pkgs types;
   };
   output = {
     nixvim = {
-      base = mkNixvim (import ./envAttrs/base.nix { inherit bpkgs; });
+      base = mkNixvim (import ./envAttrs/base.nix { inherit pkgs; });
       lean = mkNixvim (import ./envAttrs/forLean.nix { inherit lclInputs; });
       webDev = mkNixvim (import ./envAttrs/forWebDev.nix { inherit lclInputs; });
     };

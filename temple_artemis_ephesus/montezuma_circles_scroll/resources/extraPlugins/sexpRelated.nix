@@ -1,11 +1,11 @@
-{ lclInputs, bpkgs, activateDebug ? false, ... }:
+{ lclInputs, pkgs, activateDebug ? false, ... }:
 with lclInputs;
 let
   total = rec {
     final = [
-      (bpkgs.vimUtils.buildVimPlugin {
+      (pkgs.vimUtils.buildVimPlugin {
         name = "nvim-parinfer";
-        src = bpkgs.fetchFromGithub {
+        src = pkgs.fetchFromGithub {
           owner = "julienvincent";
           repo = "nvim-paredit";
           rev = "cfab7ef";
