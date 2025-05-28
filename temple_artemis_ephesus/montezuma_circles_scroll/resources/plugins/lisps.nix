@@ -8,10 +8,6 @@ let
       lsp.servers = {
         fennel_ls = {enable = true; };
         clojure_lsp = { enable = true; };
-        racket_langserver = { 
-          enable = true; 
-          package = "toprocess";
-        };
 
       };
     };

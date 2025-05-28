@@ -9,8 +9,9 @@ let
     nixvimMaker = nixvimFlake.legacyPackages.${system}.makeNixvimWithModule;
     extraConfigLua =
       foldl' (acc: next: acc + readFile next) "" extraConfigLuaList;
-    extraPluginsImportMapping =
-      map (path: import path { inherit lclInputs system types; }) extraPluginsList;
+    #currently non-functional
+    # extraPluginsImportMapping =
+    #   map (path: import path { inherit lclInputs system types; }) extraPluginsList;
     pluginsImportMapping =
       map (path: import path { inherit lclInputs system types; }) pluginsList;
     plugins = foldl' baselib.deepMerge { } pluginsImportMapping;
@@ -20,7 +21,7 @@ let
         inherit filetype;
         keymaps = import keymaps { };
         inherit extraConfigLua;
-        inherit extraPlugins;
+        #inherit extraPlugins;
         inherit plugins;
       };
     };
