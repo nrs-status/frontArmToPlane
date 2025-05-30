@@ -15,6 +15,7 @@
     /sexpRelated.nix
   ];
   extraConfigLuaList = builtins.map (path: ../resources/extraConfigLua + path) [
+    /diagnosticsDefault.lua
     /rememberFolds.lua
     /tabKeyFunc.lua
     /toggleAbsRelNums.lua
