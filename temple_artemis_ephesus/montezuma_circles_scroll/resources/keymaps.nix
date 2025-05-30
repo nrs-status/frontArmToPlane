@@ -131,12 +131,12 @@
     mode = [ "n" ];
   }
   {
-    action = "<Cmd>lua vim.diagnostic.goto_next()<cr>";
+    action = "<Cmd>lua vim.diagnostic.jump({count=1, float=true})<cr>";
     key = "<leader>j";
     mode = [ "n" ];
   }
   {
-    action = "<Cmd>lua vim.diagnostic.goto_prev()<cr>";
+    action = "<Cmd>lua vim.diagnostic.jump({count=-1, float=true})<cr>";
     key = "<leader>k";
     mode = [ "n" ];
   }
