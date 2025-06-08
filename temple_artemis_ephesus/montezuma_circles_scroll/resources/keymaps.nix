@@ -1,4 +1,15 @@
 { ... }: [
+  #use system clipboard as default keyboard
+  {
+    action ="\"+y";
+    key = "y";
+    mode = ["n"];
+  }
+  {
+    action = "\"+yy";
+    key = "yy";
+    mode = ["n"];
+  }
   #recursive unfold in current foldable
   {
     action = "zczA";
