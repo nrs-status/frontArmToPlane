@@ -40,6 +40,7 @@
         packagesToProvide = [
           [ "montezuma_circles_scroll" "nixvim" "base" ]
           "defaultCabalConfig"
+          "alaric_kicksdown_messi"
         ];
         #wUnstable = tclib.tc tclib.types.OutputDecl {
         wUnstable = {
