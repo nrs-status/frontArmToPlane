@@ -4,6 +4,9 @@ in
   pkgs.stdenv.mkDerivation {
     name = "alaric_kicksdown_messige";
     src = "./src";
-    buildPhase = "";
-    installPhase = "";
+    phases = ["installPhase"];
+    installPhase = ''
+      mkdir -p $out/bin
+      cp -r $src/* $out/bin
+    '';
   }
