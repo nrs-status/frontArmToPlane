@@ -12,7 +12,7 @@
   ];
   filetype = {};
   extraPluginsList = builtins.map (path : ../resources/extraPlugins + path) [
-    /sexpRelated.nix
+    /lispRelated.nix
   ];
   extraConfigLuaList = builtins.map (path: ../resources/extraConfigLua + path) [
     /diagnosticsDefault.lua

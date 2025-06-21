@@ -1,4 +1,5 @@
 { lclInputs, pkgs, system, types, activateDebug ? false }:
+
   let total = rec {
   final = pkgs.stdenv.mkDerivation {
     name = "alaric_kicksdown_messi";
@@ -11,10 +12,11 @@
       cp -r $src/* $out/bin
     '';
     fixupPhase = ''
-      ls $out/bin
-      echo hi
-      for file in $out/bin; do
-        echo $file
+      for file in "$out"/bin/*; do
+        if [[ -f "$file" ]]; then
+          wrapProgram $file \
+            --prefix PATH : "${pkgs.lib.makeBinPath [ pkgs.fzf ]}"
+        fi
       done
     '';
   };

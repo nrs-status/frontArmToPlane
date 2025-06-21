@@ -1,3 +1,4 @@
+change focus: Mod+arrows
 next split horizontal: Mod+Shift+backslash
 next split vertical: Mod+minus
 show/hide waybar: Mod+z
