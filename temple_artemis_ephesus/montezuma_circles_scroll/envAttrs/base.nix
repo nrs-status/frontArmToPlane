@@ -11,7 +11,7 @@
     /lisps.nix
   ];
   filetype = {};
-  extraPluginsList = builtins.map (path : ../resources/extraPlugins + path) [
+  extraPluginsPathList = builtins.map (path : ../resources/extraPlugins + path) [
     /lispRelated.nix
   ];
   extraConfigLuaList = builtins.map (path: ../resources/extraConfigLua + path) [
