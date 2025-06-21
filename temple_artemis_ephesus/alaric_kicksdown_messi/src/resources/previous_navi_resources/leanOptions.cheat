@@ -1,0 +1,8 @@
+% shintu, lean, options
+
+#show proofs in the pretty printer
+pp.proofs
+
+#show non-proof terms hidden by ...
+pp.deepTerms
+

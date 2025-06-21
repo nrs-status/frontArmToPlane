@@ -1,0 +1,52 @@
+% shintu, lean, commands
+
+#show all new generated definitions from a given command
+whatsnew in
+
+#show an exhaustive list of options/commands/tactics
+#help command/tactic/options
+
+#show a term proof corresponding to the tactic proof that follows a `by` statement
+replace by with by?
+
+#elaborate term then beta reduce it
+beta% t
+
+#runs the given expression as a `TermElabM Expr` to synthesize the expression
+by_elab doSeq
+
+#get the current declaration name
+decl_name%
+
+#evaluate a term in the interpreter and inject the resulting expression
+eval% t
+
+#show the result of eval% t
+show_term eval% t
+
+#search context for terms that can close the proof/solve the goal
+exact?% 
+
+#get the type of the argument
+type_of%
+
+#show possible unfolds for an expreession
+#unfold? e
+
+#shows samples of a type that implements SampleableExt
+#samples t; e.g.: #sample Nat 
+
+#compile/create code for given definition
+compile_def% Foo.foo
+
+#compile/create codee for recursor of given type
+compile_inductive% Foo
+
+#execute code in CommandElabM Unit, TermElabM Unit, or MetaM Unit
+run_cmd doSeq; run_elab doSeq; run_meta doSeq
+
+#make a user-defined simproc/simplification procedure
+simproc ...
+
+#description of the state of the current scope, including `open` namespaces, `universe` and `variable` commands, and options set with `set_options`
+#where

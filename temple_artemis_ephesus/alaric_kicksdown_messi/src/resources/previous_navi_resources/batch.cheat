@@ -1,0 +1,4 @@
+% shintu, general, batch
+
+# replace 'mystring' with 'thestring' in all files in the current folders
+rg -l "mystring" | xargs sed -i 's/mystring/thestring/g'

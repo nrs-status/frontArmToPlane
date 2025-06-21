@@ -1,0 +1,27 @@
+% personal_tests
+
+# test
+echo <var>
+$ var: echo 'opt1 opt2' | tr ' ' '\n' --- --map "echo use navi here only as a reference, press tab to input the query that was typed" 
+
+# test2
+echo <var2>
+$ var2: docker images --- --column 3 --header-lines 1 --delimiter '\s\s+'
+
+# test3
+echo <var3>
+$ var3: echo 'opt1 opt2' | tr ' ' '\n' --- --preview-window 'heres something to preview fucker'
+
+; test4
+# If you select "hello" for <x>, the possible values of <y> will be "hello foo" and "hello bar"
+echo <x> <y>
+
+# If you want to ignore the contents of <x> and only print <y>
+: <x>; echo <y>
+
+$ x: echo "hello hi" | tr ' ' '\n'
+$ y: echo "$x foo;$x bar" | tr ';' '\n'
+
+#test5
+echo <var5>
+$ var5: echo 'opt1 opt2 opt3' | tr ' ' '\n'

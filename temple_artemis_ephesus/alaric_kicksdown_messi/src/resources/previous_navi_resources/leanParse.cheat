@@ -1,0 +1,57 @@
+% shintu, lean, parse
+
+#character literals
+rawCh (c : Char)
+
+#symbols; parser for tokens
+symbol (s : String)
+symbolNoWs
+
+#numbers, digits, hexadecimal, binary, octal
+num
+
+#string literal
+str
+
+#identifiers
+ident
+
+#column position related parsers, indentation, whitespace
+colGe
+colGt
+colEq
+
+#line position related parsers, indentation, whitespace
+lineEq
+
+#consume whitespace
+whitespace
+
+#avoid/negate/deny whitespace
+noWs
+
+#optional, ?; necessarily succeeds but will parse p if it is there
+optional p; (p)?; p ?
+
+#repeat, multiple identical/same; repeat p until it fails
+many(p); p*
+
+#repeat but succeed at least once; repeat p until it fails but requires at least one match
+many1(p); p+
+
+#require whitespace. will parse "foo +" but not "foo+"
+"foo" ws "+"
+
+#attempt to parse with p. If fails, attempt to parse with q; combinator
+orelse p q
+
+#succeed for anything inside a given list; combinator
+anyOfFn [p, q, ...]
+
+#parse p first, and only if successful, begin parsing q; combinator
+andthen p q
+
+#negate/deny/avoid p; fail with msg "foo" if parse succeeds
+notFollowedBy(p, "foo")
+
+

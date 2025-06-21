@@ -1,0 +1,58 @@
+% shintu, general
+
+# get public ip
+curl https://api.ipify.org
+
+# change file ownership
+sudo chown username:groupname filename
+
+# change permissions of a file to normal r/w
+chmod 660 file.txt (for owner only; change ownership if you want to give a specific user access or add him to the owner's group)
+
+# check open/listening tcp ports
+netstat -lnt
+
+# create an ubuntu distrobox
+distrobox create --name ubuntu --init --image ubuntu:latest
+
+# extract the contents of a .tar.gz file
+tar -xzvf filename.tar.gz
+
+# cat/copy something to clipboard; wayland
+cat file | wl-copy
+
+# determine how much weight/size/disk usage a particular directory has
+du -sh DIRECTORY
+
+# delete/remove everything in this directory except files containing a certain word
+rm !(*WORD*)
+
+# check whether a file exists; returns 0 if it exists and 1 otherwise
+test -f <filepath>
+
+# have mkdir automatically create the nested directories in the path if they don't exist
+mkdir -p <path>
+
+# get the absolute path pointed to by a symlink
+readlink -f <symlink_path>
+
+# shutdown/turn off computer in x minutes
+sudo shutdown -h +60
+
+# print true current directory, removing effect of symlinks
+pwd -P
+
+# tee standard error as well as standard output; redirect standard error to standard output; output to file while printing
+some_command 2>&1 | tee fileToLogTo.log
+
+# create a file containing the numbers 1 through 100, each of them in a new line
+seq 1 100 > target.txt
+
+# preserve PATH on sudo; make accessible a command not installed for the superuser to sudo
+sudo env "PATH=$PATH" <program>
+
+# read the first 10 000 bytes of a block device (e.g. to hash it and compare with iso burned with `dd` to see if `dd` succeeded)
+head -c 10000 /dev/sdX
+
+# obtain the size of a file in bytes
+du -b <target>

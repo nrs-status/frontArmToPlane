@@ -1,0 +1,42 @@
+% shintu, lean, tactics
+
+#execute code within the TacticM monad
+run_tac
+
+#grab the current goal and the relevant variables and print a `theorem ... := sorry` version of the goal that can be copy pasted to be resolved separately, while omitting from the declaration all elements of the context not relevant to this goal
+extract_goal
+extract_goal using newTheoremName #will use newTheoremName for the declaration instead of an automatically generated name
+extract_goal hypothesisA #will write the declaration by omitting everything hypothesisA does not depend on
+
+#given a hypothesis with the exact same sequence of quantifiers as the goal: consume the quantifiers in the hypothesis, introduce the variables that instantiate these quantifiers, and remove the corresponding quantifiers in the goal (useful when hypothesis and goal have a long sequence of matching quantifiers)
+peel ha # peels all possible quantifiers from the hypothesis ha
+# see documentation for usage that renames introduced hyptoheses/variables
+
+#apply a function to an equality or inequality
+apply_fun f at ha
+
+#rearranges summands so that they match the given order
+move_add [(m - n), k] #will change a goal of the form k + (m - n) = x to the form (m - n) + k = x
+
+#rearrange terms containing the given operator. works like move_add
+move_oper HAdd.hAdd [(m - n), k] #does the same transformation as the move_add example
+move_oper operation [terma, termb, termc]
+
+#beta reduces at location
+beta_reduce at x
+
+#clears all hypotheses exact the ones provided (clean;remove)
+clear * - ha hb
+
+#clears the given hypothesis (clean;remove)
+clear ha
+clear! ha #also clears whatever depends on it
+
+#changes a hypothesis containing := into one without it; e.g. n : A := t to n : A
+clear_value ha
+
+#if a hypothesis has the form: forall x y ... exists a  b ...; p a x v/^ q b y introduces a b and the propositions p and q
+choose a b ha hb
+
+#show the term corresponding to a tactic
+show_term tac

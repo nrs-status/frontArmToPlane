@@ -1,0 +1,44 @@
+% shintu, lean, terms
+
+#pattern match on e, bind expression to x, and produce a proof that x = e
+x@h:e
+
+#if-then-else that depends on whether d can pattern match on pat
+if let pat := d then t else e
+
+#shortcut for by assumption; \f< \f>
+\<_\>
+
+#resolve to any hypothesis of type t; can be used to access inaccessible variables
+\<t\>
+
+
+#use an equality provided by h to make a substitution in p
+h \t p
+
+#partial coercion
+(\u)
+
+#coercion
+\u
+
+#coerce to type
+\u-|
+
+#coerce to function
+\u=
+
+#congruence
+congr(1 + $h)
+
+#synth default or Nonempty
+default_or_Nonempty%
+
+#get declaration name
+decl_name%
+
+#get type
+type_of%
+
+#change the elaboration order of a let declaration; let_delayed x := v; b elaborates b before x
+let_delayed

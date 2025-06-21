@@ -1,0 +1,16 @@
+% ssh, shintu, remote
+
+# Connect to a remote server with a specific identity (private key) at a specific port:
+ssh -i path/to/key_file -p PORT username@remote_host
+
+# Copy the contents of a directory from a remote host to a local directory:
+scp -i path/to/key_file -r username@remproductionote_host:path/to/remote_directory path/to/local_directory (or inverse arguments to change direction)
+
+# Use rsync to copy a directory from local host to remote host (reverse argument direction to copy in opposite direction)
+rsync -r -e "ssh -i KEYPATH" ./simple_api/ sebaarsim@34.31.64.47:/home/sebaarsim/simple_api
+
+# Use rsync to copy a file from local host to remote host (reverse argument direction to copy in opposite direction) 
+rsync -a -e "ssh -i KEYPATH" ./simple_api/ sebaarsim@34.31.64.47:/home/sebaarsim/simple_api
+
+# Generate a key interactively:
+ssh-keygen

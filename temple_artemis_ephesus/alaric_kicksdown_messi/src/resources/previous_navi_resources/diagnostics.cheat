@@ -1,0 +1,13 @@
+% shintu, diagnostics
+
+# follow children/subprocesses/forks along with the main process
+strace -f <program>
+
+# limit reports to filesystem operations
+strace -etrace=file <program>
+
+# print command names assoiated with PID
+strace -Y
+
+#trace what file descriptors are opened by a process
+lsof -p <pid>

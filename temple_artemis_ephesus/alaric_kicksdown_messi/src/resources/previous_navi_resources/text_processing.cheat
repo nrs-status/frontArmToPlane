@@ -1,0 +1,49 @@
+% shintu, text
+
+# delete/remove all instances of a character a string. Passing more arguments will not remove a word, it will instead delete all passed characters
+tr -d 'X'
+
+# remove leading whitespace from a string
+sed '/^[ \t]*//'
+
+# get lines 100 through 120 of a text file; extract lines between two line numbers
+cat <file> | sed -n '100,120p'
+
+# get the 50 lines before the line 4849512 in a file
+head -n +4849512 filename.txt | tail -n 50
+
+# obtain how many lines a file contains; number of lines; count
+wc -l <filename>
+
+# obtain the first part of a string, the part after a given character 
+cut -d'<character>' -f1
+
+# obtain the second part of a string, the part after a given character
+cud -d'<character>' -f2
+
+# keep only x/a number of the top lines of an incoming/piped string
+head -n <number>
+
+# get a specific/determinate line from an incoming string
+sed -n '#p'; e.g. sed -n '7p'
+
+# delete all empty lines
+sed '/^$?d'
+
+# delete all lines containing a specific word from a file, editing the file in place/in-place, i.e., modifying the source/original
+sed -i '/lastModified/d' filename.txt
+
+# preserve all lines before the word 'myword', including the line containing it
+awk '/myword/{print;exit} 1' <targetfile>
+
+# preserve all lines before the word 'myword', excluding the line containing it
+awk '/myword/{exit} 1' <targetfile>
+
+# preserve all lines after the word 'myword', including the line containing it
+awk '/myword/{p=1} p' <targetfile>
+
+# preserve all lines after the word 'myword', excluding the line containing it
+awk '/myword/{p=1;next} p' <targetfile>
+
+# grab the first part of a string divided by one or more whitespace characters
+echo "1121 blahblah" | awk '{print $1}'
