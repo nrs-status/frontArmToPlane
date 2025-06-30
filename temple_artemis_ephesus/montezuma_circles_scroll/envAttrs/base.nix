@@ -9,6 +9,7 @@
     /lsp.nix
     /pluginsCore.nix
     /lisps.nix
+    /webDevPlugins.nix
   ];
   filetype = {};
   extraPluginsPathList = builtins.map (path : ../resources/extraPlugins + path) [
