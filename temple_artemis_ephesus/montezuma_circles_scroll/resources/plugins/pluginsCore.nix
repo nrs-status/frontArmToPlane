@@ -128,6 +128,7 @@ let total = rec {
         cabal = ["cabal_fmt"];
         json = ["fixjson"];
         yaml = ["yamlfmt"];
+        ocaml = ["ocamlformat"];
       };
     };
 
