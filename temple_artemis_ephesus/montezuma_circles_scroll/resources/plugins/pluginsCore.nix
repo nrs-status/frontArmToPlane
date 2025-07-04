@@ -29,14 +29,6 @@ let total = rec {
 
     auto-save.enable = true;
 
-    #automatically close brackets, parentheses, etc.
-    nvim-autopairs = {
-      enable = true;
-      settings = {
-        map_cr = true; #behaviour of <cr> when cursor is in the following position: {|}
-      };
-    };
-
     #pre-existing snippets collection
     friendly-snippets.enable = true;
 
