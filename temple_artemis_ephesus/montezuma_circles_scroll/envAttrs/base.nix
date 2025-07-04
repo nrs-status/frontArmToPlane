@@ -21,6 +21,7 @@
     /tabKeyFunc.lua
     /toggleAbsRelNums.lua
     /compile.lua
+    /pareditConfig.lua
   ];
   extraPackages = with pkgs; [
     #used by conform-nvim
