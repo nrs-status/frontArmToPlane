@@ -22,6 +22,7 @@
     /toggleAbsRelNums.lua
     /compile.lua
     /pareditConfig.lua
+    /def_and_eval.lua
   ];
   extraPackages = with pkgs; [
     #used by conform-nvim

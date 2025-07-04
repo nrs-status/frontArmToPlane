@@ -1,5 +1,5 @@
 
 
 
-(def x (def x (fn [] (fn [] (x)))))
-(((def x (+ [1 2 3] 1))))
+
+(def x (+ 1 (+ 5 ((comp (partial + 1)) 7)
