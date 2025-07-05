@@ -2,4 +2,4 @@
 
 
 
-(def x (+ 1 (+ 5 ((comp (partial + 1)) 7)
+(def x (+ 1 (+ 5 ((comp (partial + 1)) 7))))
