@@ -45,7 +45,7 @@ local function initialize_introspection_atm()
   local function _2_(_r)
     return print("introspection-atm INIT")
   end
-  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(def introspection-atom (atom nil))", ["on-result"] = _2_, ["passive?"] = false})
+  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(def introspection-atm (atom nil))", ["on-result"] = _2_, ["passive?"] = false})
 end
 local function eval_w_introspection_atm()
   local esc_key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)

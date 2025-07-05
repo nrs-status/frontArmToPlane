@@ -3,8 +3,8 @@
 
 
 (def x (+ 1 (+ 5 
-               ((comp 
+               (comp 
                   (partial + 10)
                   (partial + 10)
                   (partial + 10)
-                  (partial + 1)) 7))))
+                  (partial + 1)))))
