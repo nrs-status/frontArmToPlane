@@ -7,4 +7,5 @@
                   (partial + 10)
                   (partial + 10)
                   (partial + 10)
-                  (partial + 1)) 5))
+                  (fn [x] (partial + 1))
+                  ) 5))
