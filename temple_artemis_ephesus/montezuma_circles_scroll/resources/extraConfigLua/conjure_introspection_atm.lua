@@ -47,9 +47,6 @@ local function initialize_introspection_atm()
   end
   return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(def introspection-atm (atom nil))", ["on-result"] = _2_, ["passive?"] = false})
 end
-vim.keymap.set("n", "<leader>eii", initialize_introspection_atm)
-vim.keymap.set("n", "<leader>eid", function() print(inited_3f) end)
-
 local function eval_w_introspection_atm()
   local esc_key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
   if not inited_3f then
@@ -67,7 +64,7 @@ local function print_introspection_atm()
   local function _4_(r)
     return print("RESULT:", r)
   end
-  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(clojure.pprint/pprint @introspection-atm)", ["on-result"] = _4_, ["passive?"] = false})
+  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "@introspection-atm", ["on-result"] = _4_, ["passive?"] = false})
 end
 vim.keymap.set("n", "<leader>eie", eval_w_introspection_atm)
 vim.keymap.set("n", "<leader>eip", print_introspection_atm)

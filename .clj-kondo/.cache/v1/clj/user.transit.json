@@ -1,1 +1,1 @@
-["^ ","~$x",["^ ","~:row",5,"~:col",1,"~:name","~$x","~:ns","~$user","~:top-ns",null,"~:type","~:number"],"~:filename","/home/sieyes/baghdad_plane/flakes/frontArmToPlane/test.clj"]
+["^ ","~$x",["^ ","~:row",5,"~:col",1,"~:fixed-arities",["~#set",[1]],"~:name","~$x","~:ns","~$user","~:top-ns",null,"~:type","~:fn"],"~:filename","/home/sieyes/baghdad_plane/flakes/frontArmToPlane/test.clj"]
