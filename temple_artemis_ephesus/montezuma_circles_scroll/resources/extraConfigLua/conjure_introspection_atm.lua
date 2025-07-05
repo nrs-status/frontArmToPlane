@@ -68,4 +68,3 @@ local function print_introspection_atm()
 end
 vim.keymap.set("n", "<leader>eie", eval_w_introspection_atm)
 vim.keymap.set("n", "<leader>eip", print_introspection_atm)
-return nil
