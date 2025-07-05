@@ -58,7 +58,7 @@ local function eval_w_introspection_atm()
   vim.api.nvim_feedkeys("vafc", "x", false)
   vim.api.nvim_put({"(fn [x] (reset! introspection-atm x))"}, "c", true, true)
   def_and_eval()
-  return vim.api.nvim_feedkeys(("vafc" .. esc_key .. "\"ap" .. "x" .. false))
+  return vim.api.nvim_feedkeys(("vafc" .. esc_key .. "\"ap"), "x", false)
 end
 local function print_introspection_atm()
   local function _4_(r)
