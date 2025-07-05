@@ -60,4 +60,4 @@ local function eval_comp_up_to_current_line()
   def_and_eval()
   return toggle_comment_up_to_comp_then_come_back()
 end
-vim.keymap.set("n", "<leader>ec", eval_comp_up_to_current_line)
+vim.keymap.set("n", "<leader>eg", eval_comp_up_to_current_line)

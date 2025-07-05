@@ -6,4 +6,4 @@
                ((comp 
                   (partial + 10)
                   (partial + 5)
-                    (partial + 1)) 7))))
+                  (partial + 1)) 7))))
