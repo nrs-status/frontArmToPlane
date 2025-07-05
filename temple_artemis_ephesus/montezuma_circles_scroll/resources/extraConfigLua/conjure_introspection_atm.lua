@@ -49,6 +49,7 @@ local function initialize_introspection_atm()
 end
 local function eval_w_introspection_atm()
   local esc_key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+  local leader_key = vim.api.nvim_replace_termcodes("<leader>", true, false, true)
   if not inited_3f then
     inited_3f = true
     initialize_introspection_atm()
@@ -58,7 +59,7 @@ local function eval_w_introspection_atm()
   vim.api.nvim_feedkeys("vafc", "x", false)
   vim.api.nvim_put({"(fn [x] (reset! introspection-atm x))"}, "c", true, true)
   def_and_eval()
-  return vim.api.nvim_feedkeys(("vafc" .. esc_key .. "\"ap"), "x", false)
+  return vim.api.nvim_feedkeys((leader_key .. "er" .. "vafc" .. esc_key .. "\"ap"), "x", false)
 end
 local function print_introspection_atm()
   local function _4_(r)
