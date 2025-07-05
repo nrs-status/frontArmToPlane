@@ -23,6 +23,8 @@
     /compile.lua
     /pareditConfig.lua
     /def_and_eval.lua
+    /partial_comp_eval.lua
+    /conjure_introspection_atm.lua
   ];
   extraPackages = with pkgs; [
     #used by conform-nvim
