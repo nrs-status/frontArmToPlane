@@ -47,7 +47,33 @@ local function initialize_introspection_atm()
   end
   return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(def introspection-atm (atom nil))", ["on-result"] = _2_, ["passive?"] = false})
 end
-local function eval_w_introspection_atm()
+local function reset_introspection_atm_to_empty_vec()
+  local function _3_(_r)
+    return print("introspection-atm resetted to []")
+  end
+  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "(reset! introspection-atm [])", ["on-result"] = _3_, ["passive?"] = false})
+end
+local function cursor_on_paren_3f()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local row = (cursor_pos[1] - 1)
+  local col = cursor_pos[2]
+  local line = vim.api.nvim_buf_get_lines(0, row, (row + 1), false)
+  local char
+  if ((#line > 0) and (col >= 0) and (col < #line[1])) then
+    char = string.sub(line[1], (col + 1), (col + 1))
+  else
+    char = nil
+  end
+  if char then
+    return ((char == "(") or (char == ")"))
+  else
+    return false
+  end
+end
+local function mk_wrapper_for_eval(target, action)
+  return ("(fn [x] (do " .. action .. " (" .. target .. " x)))")
+end
+local function eval_w_introspection_atm(string_to_eval)
   local esc_key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
   local leader_key = vim.api.nvim_replace_termcodes("<leader>", true, false, true)
   if not inited_3f then
@@ -57,15 +83,25 @@ local function eval_w_introspection_atm()
   end
   vim.api.nvim_feedkeys("vaf\"ay", "x", false)
   vim.api.nvim_feedkeys("vafc", "x", false)
-  vim.api.nvim_put({"(fn [x] (reset! introspection-atm x))"}, "c", true, true)
+  vim.api.nvim_put({string_to_eval}, "c", true, true)
   def_and_eval()
   return vim.api.nvim_feedkeys((leader_key .. "er" .. "vafc" .. esc_key .. "\"ap"), "x", false)
 end
+local function eval_replacing_w_conj_21()
+  return eval_w_introspection_atm("(fn [x] (conj! introspection-atm x))")
+end
+local function eval_replacing_w_reset_21()
+  return eval_w_introspection_atm("(fn [x] (reset! introspection-atm x))")
+end
+local eval_options = {"(fn [x] (do (conj! introspection-atm x) (_ x)))", "(fn [x] (do (reset! introspection-atm x) (_ x)))"}
 local function print_introspection_atm()
-  local function _4_(r)
+  local function _7_(r)
     return print("RESULT:", r)
   end
-  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "@introspection-atm", ["on-result"] = _4_, ["passive?"] = false})
+  return client["with-filetype"]("clojure", eval["eval-str"], {origin = "introspection-atm", code = "@introspection-atm", ["on-result"] = _7_, ["passive?"] = false})
 end
-vim.keymap.set("n", "<leader>eie", eval_w_introspection_atm)
+vim.keymap.set("n", "<leader>eiwc", eval_replacing_w_conj_21)
+vim.keymap.set("n", "<leader>eiwr", eval_replacing_w_reset_21)
 vim.keymap.set("n", "<leader>eip", print_introspection_atm)
+vim.keymap.set("n", "<leader>eie", reset_introspection_atm_to_empty_vec)
+vim.keymap.set("n", "<leader>eii", initialize_introspection_atm)
