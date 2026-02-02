@@ -20,6 +20,8 @@ let total = rec {
   ];
   packagesFromLocalRepo = with lclPkgs; [
     montezuma_circles_scroll.nixvim.base
+    montezuma_circles_scroll.nixvim.lean
+
   ];
   shellHook = ''
     export name=workEnv
