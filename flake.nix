@@ -39,6 +39,7 @@
         envsToProvide = [ "workEnv" ];
         packagesToProvide = [
           [ "montezuma_circles_scroll" "nixvim" "base" ]
+          [ "montezuma_circles_scroll" "nixvim" "lean" ]
           "defaultCabalConfig"
           "alaric_kicksdown_messi"
         ];
