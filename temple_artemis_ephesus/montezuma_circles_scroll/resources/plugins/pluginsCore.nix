@@ -126,6 +126,9 @@ let total = rec {
 
     #adds pictograms to lsp
     lspkind.enable = true;
+
+    #agda
+    cornelis.enable = true;
   };
 
 }; in prelib.wrapDebug {
