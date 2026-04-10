@@ -1,5 +1,5 @@
 replacement for
-du -> ncdu
+du -> gdu
 find -> fd
 df -> duf
 
