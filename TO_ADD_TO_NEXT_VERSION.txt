@@ -18,3 +18,6 @@ one of: ranger nnn
 
 wm in:
 https://old.reddit.com/r/commandline/comments/1l2pi84/drop_ur_fav/
+
+make my own version of:
+https://old.reddit.com/r/commandline/comments/1qljci8/tui_tmmpr_terminal_mind_mapper/
