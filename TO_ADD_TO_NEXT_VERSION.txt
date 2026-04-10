@@ -10,6 +10,7 @@ pqiv
 zoxide
 atuin
 difftastic
+rtorrent
 
 one of: ranger nnn
 
