@@ -11,6 +11,7 @@ zoxide
 atuin
 difftastic
 rtorrent
+irssi
 
 one of: ranger nnn
 
