@@ -3,7 +3,7 @@ du -> gdu
 find -> fd
 df -> duf
 
-newsboat
+eilmeldung
 spotify_player
 vlc
 pqiv
