@@ -12,6 +12,7 @@ atuin
 difftastic
 rtorrent
 irssi
+yank
 
 one of: ranger nnn
 
