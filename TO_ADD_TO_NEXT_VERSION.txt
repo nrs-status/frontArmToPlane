@@ -9,6 +9,8 @@ vlc
 pqiv
 zoxide
 atuin
+difftastic
+ranger (or some file manager)
 
 wm in:
 https://old.reddit.com/r/commandline/comments/1l2pi84/drop_ur_fav/
