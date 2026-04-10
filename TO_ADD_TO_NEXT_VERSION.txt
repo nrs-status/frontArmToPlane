@@ -1,0 +1,4 @@
+replacement for
+du -> ncdu
+find -> fd
+df -> duf
