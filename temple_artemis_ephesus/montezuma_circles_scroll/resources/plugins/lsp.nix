@@ -15,6 +15,8 @@ let
 
           clangd.enable = true;
 
+          rust_analyzer.enable = true;
+
           #with no default lsp package
           lua-ls = {
             enable = true;
