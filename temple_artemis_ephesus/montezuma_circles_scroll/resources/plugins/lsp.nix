@@ -13,6 +13,8 @@ let
           nixd.enable = true;
           bashls.enable = true;
 
+          clangd.enable = true;
+
           #with no default lsp package
           lua-ls = {
             enable = true;
