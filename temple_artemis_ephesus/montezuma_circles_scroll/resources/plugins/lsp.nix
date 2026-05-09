@@ -13,7 +13,19 @@ let
           nixd.enable = true;
           bashls.enable = true;
 
-          clangd.enable = true;
+          clangd = { 
+            enable = true;
+            config = { 
+              cmd = [
+                      "clangd"
+                      "--background-index"
+                    ];
+              filetypes = [
+                            "c"
+                            "cpp"
+                    ];
+            };
+          };
 
           rust_analyzer.enable = true;
 
