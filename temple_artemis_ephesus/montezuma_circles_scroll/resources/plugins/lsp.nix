@@ -15,7 +15,7 @@ let
 
           clangd = { 
             enable = true;
-        /-    config = { 
+        /*    config = { 
               cmd = [
                       "clangd"
                       "--background-index"
@@ -24,7 +24,7 @@ let
                             "c"
                             "cpp"
                     ];
-            }; -/
+            }; */
           };
 
           rust_analyzer.enable = true;
